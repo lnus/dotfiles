@@ -3,6 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 bindkey -v
+
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/linus/.zshrc'
@@ -12,3 +13,7 @@ compinit
 # End of lines added by compinstall
 
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Aliases
+
+alias la="ls -la"
