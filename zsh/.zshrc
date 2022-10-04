@@ -46,7 +46,7 @@ v () {
 if [ $# -eq 0 ]; then
     nvim "$(fzf)"
 else
-    nvim "$*"
+    nvim $* # Runs nvim with all commands
 fi
 }
 
@@ -76,6 +76,10 @@ else
     code "$*"
 fi
 }
+
+# ripgrep epic vim integration
+rgl () { rg "$1" --no-heading --line-number | cut -d':' -f1-2 --output-delimiter=" +" }
+rglv () { rgl "$1" | head -n 1 | v }
 
 # fzf
 
