@@ -85,6 +85,9 @@ map <Leader>fk :BLines<CR>
 " Ebic window manager
 nnoremap <Leader>w <C-w>
 
+" CoC hover
+map <Leader>. :call CocAction('doHover')<CR>
+
 " python specific bindings :)
 " runs the currently opened buf. will only load in python bufs
 autocmd BufEnter *.py nmap <leader>pr :w<CR>:exec '!python3' shellescape(@%, 1)<CR>

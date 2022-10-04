@@ -50,7 +50,7 @@ else
 fi
 }
 
-alias vim="v"
+#alias vim="v"
 
 # fuzzy vim hidden
 vh () { nvim "$(find . -print | fzf)" }
