@@ -24,7 +24,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 
 " ---- Vim-Which-Key ----
-let g:which_key_map = {'w' : 'save', 'r' : 'reformat', 'n': 'nerdtree'}
+let g:which_key_map = {'w': 'windows','r' : 'reformat', 'n': 'nerdtree'}
 let g:which_key_map.b = { 'name' :'+buffer', 'd': 'delete current buffer', 'n': 'next TAB', 'p': 'prev SHIFT-TAB' }
 let g:which_key_map.v = { 'name' : '+vim', 's': 'source vimrc', 'e': 'edit vimrc' }
 let g:which_key_map.n = { 'name': '+nerd', 't': 'toggle nerdtree', 'f': 'focus nerdtree' }

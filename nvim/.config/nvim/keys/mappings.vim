@@ -19,14 +19,17 @@ nnoremap <c-u> viwU<Esc>
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
 nnoremap <Leader>bn :bnext<CR>
+
 " SHIFT-TAB will go back
 nnoremap <S-TAB> :bprevious<CR>
 nnoremap <Leader>bp :bprevious<CR>
+
 " Closes current buffer
 nnoremap <Leader>bd :bd<CR>
 
 " Use control-c instead of escape
 nnoremap <C-c> <Esc>
+
 " <TAB>: completion.
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#_select_confirm() :
@@ -60,7 +63,7 @@ nmap <leader>e <Plug>(coc-format)
 
 " Vim related bindings
 " Save file with leader w, faster
-nnoremap <Leader>w :w!<CR>
+"nnoremap <Leader>w :w!<CR>
 " Resources the vimrc
 map <Leader>vs :source $MYVIMRC<CR>
 " Open vimrc in vertical tab
@@ -78,6 +81,9 @@ map <Leader>fg :GFiles<CR>
 map <Leader>fc :Colors<CR>
 map <Leader>fl :Lines<CR>
 map <Leader>fk :BLines<CR>
+
+" Ebic window manager
+nnoremap <Leader>w <C-w>
 
 " python specific bindings :)
 " runs the currently opened buf. will only load in python bufs
