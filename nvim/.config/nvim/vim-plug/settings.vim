@@ -24,7 +24,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
 
 " ---- Vim-Which-Key ----
-let g:which_key_map = {'w': 'windows','r' : 'reformat', 'n': 'nerdtree'}
+let g:which_key_map = {'w': 'windows','r' : 'rename', 'n': 'nerdtree'}
 let g:which_key_map.b = { 'name' :'+buffer', 'd': 'delete current buffer', 'n': 'next TAB', 'p': 'prev SHIFT-TAB' }
 let g:which_key_map.v = { 'name' : '+vim', 's': 'source vimrc', 'e': 'edit vimrc' }
 let g:which_key_map.n = { 'name': '+nerd', 't': 'toggle nerdtree', 'f': 'focus nerdtree' }
@@ -39,21 +39,21 @@ vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 let NERDTreeShowHidden = 1
 
 " ---- LightLine ----
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
-      \   'readonly': 'LightlineReadonly',
-      \   'modified': 'LightlineModified',
-      \   'filename': 'LightlineFilename'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+"let g:lightline = {
+      "\ 'colorscheme': 'gruvbox',
+      "\ 'active': {
+      "\   'left': [ [ 'mode', 'paste' ],
+      "\             [ 'fugitive', 'filename' ] ]
+      "\ },
+      "\ 'component_function': {
+      "\   'fugitive': 'LightlineFugitive',
+      "\   'readonly': 'LightlineReadonly',
+      "\   'modified': 'LightlineModified',
+      "\   'filename': 'LightlineFilename'
+      "\ },
+      "\ 'separator': { 'left': '', 'right': '' },
+      "\ 'subseparator': { 'left': '', 'right': '' }
+      "\ }
 
 function! LightlineModified()
     if &filetype == "help"

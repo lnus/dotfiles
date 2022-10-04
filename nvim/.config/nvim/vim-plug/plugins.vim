@@ -22,7 +22,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " stuff (should document this)
 Plug 'easymotion/vim-easymotion'
-Plug 'morhetz/gruvbox'
+Plug 'bluz71/vim-moonfly-colors'
 Plug 'liuchengxu/vim-which-key'
 " Plug 'whatyouhide/vim-gotham'
 " Plug 'itchyny/lightline.vim'
