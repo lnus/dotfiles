@@ -7,7 +7,7 @@ rm -f "$HOME/.vimrc"
 rm -f "$HOME/.zshrc"
 rm -f "$HOME/.p10k.zsh"
 
-cp "./nvim/.config/nvim" "$HOME/.config/nvim" 
+cp -r "./nvim/.config/nvim" "$HOME/.config/nvim" 
 cp "./vim/.vimrc" "$HOME/.vimrc" 
 cp "./zsh/.zshrc" "$HOME/.zshrc"
 cp "./zsh/.p10k.zsh" "$HOME/.p10k.zsh"
