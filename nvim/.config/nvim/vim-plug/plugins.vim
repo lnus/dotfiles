@@ -10,11 +10,11 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
 " Better Syntax Support
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 " File Explorer
-" Plug 'scrooloose/NERDTree'
+Plug 'scrooloose/NERDTree'
 " Auto pairs for '(' '[' '{'
-" Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 " Go language support
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Coc
@@ -23,12 +23,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " stuff (should document this)
 Plug 'easymotion/vim-easymotion'
 Plug 'morhetz/gruvbox'
-" Plug 'liuchengxu/vim-which-key'
+Plug 'liuchengxu/vim-which-key'
 " Plug 'whatyouhide/vim-gotham'
 " Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-surround'
-" Plug 'preservim/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdcommenter'
 " Plug 'preservim/tagbar'
 Plug 'mhinz/vim-startify'
 
