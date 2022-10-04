@@ -52,6 +52,22 @@ fi
 
 alias vim="v"
 
+# fuzzy vim hidden
+vh () { nvim "$(find . -print | fzf)" }
+
+# fuzzy cd
+fd () { 
+if [ $# -eq 0 ]; then
+    cd $(find . \( ! -path '*/.*' \) -type d -print | fzf)
+elif [ $1 = "." ]; then
+    cd $(find . -type d -print | fzf)
+else
+    cd $1
+    cd $(find . \( ! -path '*/.*' \) -type d -print | fzf)
+fi
+}
+
+
 # VS Code function
 c () {
 if [ $# -eq 0 ]; then
