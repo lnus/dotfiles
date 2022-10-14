@@ -20,6 +20,8 @@ Plug 'jiangmiao/auto-pairs'
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Snippets
+Plug 'honza/vim-snippets'
 
 " stuff (should document this)
 Plug 'easymotion/vim-easymotion'
