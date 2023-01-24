@@ -1,24 +1,3 @@
-;; TODO: Move this to a init-packages.el
-;; Define and initialise package repos
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-;; List packages I want
-(setq package-list
-      '(evil magit minimap gruvbox-theme))
-
-;; Init packages
-(package-initialize)
-
-;; Fetch available packages 
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Install missing packages
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
 ;; Enable Evil
 (require 'evil)
 (evil-mode 1)
@@ -39,6 +18,9 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Fido-swag
+(fido-vertical-mode 1)
 
 ;; Sets gruvbox theme as safe
 (custom-set-variables
