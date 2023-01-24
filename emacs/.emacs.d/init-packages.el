@@ -6,7 +6,7 @@
 
 ;; List packages I want
 (setq package-list
-      '(evil magit minimap gruvbox-theme))
+      '(evil magit minimap gruvbox-theme lsp-mode lsp-ui flycheck))
 
 ;; Init packages
 (package-initialize)

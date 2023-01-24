@@ -22,6 +22,10 @@
 ;; Fido-swag
 (fido-vertical-mode 1)
 
+;; LSP configs
+(require 'lsp-mode)
+(add-hook 'prog-mode-hook 'lsp-deferred) ;; Less chatty for unsupported modes (setq lsp-warn-no-matched-clients nil)
+
 ;; Sets gruvbox theme as safe
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
