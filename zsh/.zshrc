@@ -90,6 +90,6 @@ rglv () { rgl "$1" | head -n 1 | v }
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # doom bin
-path+=('/home/linus/.config/doom/bin')
+path+=('/home/linus/.config/emacs/bin')
 
 export PATH
