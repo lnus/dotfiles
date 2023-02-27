@@ -22,7 +22,7 @@ compinit
 # Plugins
 
 # https://github.com/marlonrichert/zsh-autocomplete
-source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 # https://github.com/romkatv/powerlevel10k
 source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
@@ -57,7 +57,7 @@ fi
 vh () { nvim "$(find . -print | fzf)" }
 
 # fuzzy cd
-fd () { 
+fucd () { 
 if [ $# -eq 0 ]; then
     cd $(find . \( ! -path '*/.*' \) -type d -print | fzf)
 elif [ $1 = "." ]; then
@@ -88,3 +88,8 @@ rglv () { rgl "$1" | head -n 1 | v }
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# doom bin
+path+=('/home/linus/.config/doom/bin')
+
+export PATH
