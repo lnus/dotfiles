@@ -91,5 +91,9 @@ rglv () { rgl "$1" | head -n 1 | v }
 
 # doom bin
 path+=('/home/linus/.config/emacs/bin')
+path+=('/home/linus/.local/bin')
+
+# elixir ls
+path+=('/home/linus/.elixir-ls/release')
 
 export PATH
