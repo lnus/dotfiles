@@ -96,4 +96,14 @@ path+=('/home/linus/.local/bin')
 # elixir ls
 path+=('/home/linus/.elixir-ls/release')
 
+# source ass duff
+ASDF="$HOME/.asdf/asdf.sh"
+if [ -f "$ASDF" ]; then
+    . $ASDF
+else
+    # TODO: Maybe make this version independent(?)
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
+    . $ASDF
+fi
+
 export PATH
