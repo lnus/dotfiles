@@ -30,8 +30,12 @@ source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
 alias la="ls -la"
 
-
 # Functions
+
+# WSL Update script
+if grep -qi microsoft /proc/version; then
+    alias wslu="$HOME/dotfiles/wsl-update.sh"
+fi
 
 # File manager
 fm () {
