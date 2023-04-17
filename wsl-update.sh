@@ -9,6 +9,6 @@
 
 SRC="$HOME/dotfiles/wezterm/.wezterm.lua"
 DST="/mnt/c/Users/Linus/.wezterm.lua"
-echo "Copying: $SRC => $DST"
+# echo "Copying: $SRC => $DST"
 cp $SRC $DST
 
