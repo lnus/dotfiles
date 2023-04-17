@@ -1,0 +1,22 @@
+#!/bin/bash
+# Simple script for setting up a tmux session with a few windows and panes.
+# Just how I like it.
+
+# Start a new tmux session
+tmux new-session -s "$1" -n "main" -d
+
+# Create a new window
+tmux new-window -n "vim" -t "$1"
+
+# Spawn NeoVim in the new window and split the pane
+tmux send-keys -t "$1:1" "nvim $(pwd)" C-m
+tmux split-window -h -t "$1:1"
+
+# Create a new window
+tmux new-window -n "git" -t "$1"
+
+# Spawn git status in the new window
+tmux send-keys -t "$1:2" "git status" C-m
+
+# Finally, attach to the session, in the main window
+tmux attach-session -t "$1:0"
