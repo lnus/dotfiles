@@ -39,6 +39,9 @@ Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
+" GitHub Copilot
+Plug 'GitHub/copilot.vim'
+
 " Unity
 " Plug 'OmniSharp/omnisharp-vim' 
 
