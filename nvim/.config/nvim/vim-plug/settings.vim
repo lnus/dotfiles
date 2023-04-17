@@ -97,4 +97,5 @@ let g:coc_global_extensions=[
       \'coc-omnisharp', 'coc-json', 'coc-git', 'coc-go',
       \'coc-vimlsp', 'coc-python', 'coc-tsserver', 'coc-html',
       \'coc-css', 'coc-prettier', 'coc-powershell', 'coc-sh',
-      \'coc-snippets', 'coc-vimtex', 'coc-texlab', 'coc-clangd']
+      \'coc-snippets', 'coc-vimtex', 'coc-texlab', 'coc-clangd',
+      \'coc-elixir']
