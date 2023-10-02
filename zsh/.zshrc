@@ -21,10 +21,8 @@ compinit
 
 # Plugins
 
-# https://github.com/marlonrichert/zsh-autocomplete
-# source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-# https://github.com/romkatv/powerlevel10k
-source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+# Starship 
+eval "$(starship init zsh)"
 
 # Aliases
 
