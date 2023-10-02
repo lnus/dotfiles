@@ -27,13 +27,6 @@ set $rofi_cmd rofi \
 # TODO: add window with the next release of rofi-wayland
 set $menu $rofi_cmd -modi drun -show drun
 
-# Load dark theme
-
-set $gnome-schema org.gnome.desktop.interface
-exec_always {
-    gsettings set $gnome-schema gtk-theme 'Sweet-mars'
-}
-
 ### GAPS
 gaps inner 5
 gaps outer 5
