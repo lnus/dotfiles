@@ -110,4 +110,7 @@ else
     . $ASDF
 fi
 
+# Which desktop environment to display.
+XDG_CURRENT_DESKTOP=""
+
 export PATH
