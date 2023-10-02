@@ -40,8 +40,8 @@ set $rofi_cmd rofi \
 set $menu $rofi_cmd -modi drun -show drun
 
 ### GAPS
-gaps inner 5
-gaps outer 5
+gaps inner 0
+gaps outer 0
 
 ### Window stuff
 default_border pixel
