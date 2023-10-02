@@ -1,3 +1,15 @@
+# Include catppuccin-mocha :3
+include catppuccin-mocha
+
+# Catppuccin mocha colors
+# target                 title     bg    text   indicator  border
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
@@ -32,11 +44,8 @@ gaps inner 5
 gaps outer 5
 
 ### Window stuff
-default_border none
-default_floating_border none
-font pango:monospace 0
-titlebar_padding 1
-titlebar_border_thickness 0
+default_border pixel
+default_floating_border pixel
 
 ### Output configuration
 #
