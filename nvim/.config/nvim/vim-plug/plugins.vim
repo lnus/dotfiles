@@ -42,6 +42,9 @@ Plug 'junegunn/fzf.vim'
 " GitHub Copilot
 Plug 'GitHub/copilot.vim'
 
+" Catpuccin colors (nyaa)
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 " Unity
 " Plug 'OmniSharp/omnisharp-vim' 
 

@@ -1,4 +1,5 @@
-colorscheme moonfly
+colorscheme catppuccin-mocha
+"colorscheme moonfly
 "hi Normal guibg=NONE ctermbg=NONE
 "autocmd ColorScheme * highlight CocErrorFloat guifg=#ffffff
 "autocmd ColorScheme * highlight CocInfoFloat guifg=#ffffff
