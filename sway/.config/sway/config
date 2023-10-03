@@ -250,8 +250,9 @@ bindsym $mod+r mode "resize"
 #
 include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
 
-# Keyboard layout
+# Keyboard layout + natural scrolling
 input * {
 	xkb_layout "se"
 	xkb_options "grp:win_space_toggle"
+    natural_scroll enabled
 }
