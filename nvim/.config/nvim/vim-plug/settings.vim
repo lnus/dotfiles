@@ -34,6 +34,11 @@ let g:which_key_map.p = { 'name': '+python', 'r': 'Run current buffer Python3' }
 call which_key#register('<Space>', "g:which_key_map")
 nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+vnoremap <silent> <localleader> :<c-u>WhichKeyVisual  ','<CR>
+
+" ---- VimTeX ----
+let g:vimtex_view_method = 'zathura'
 
 " ---- NERDTree ----
 let NERDTreeShowHidden = 1
