@@ -8,7 +8,7 @@
         "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media"],
         // "modules-center": ["sway/window"],
         // "modules-center": ["clock"],
-        "modules-right": ["network", "pulseaudio", "battery", "clock"],
+        "modules-right": ["network", "pulseaudio", "battery", "clock", "tray"],
         // "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "mpd", "tray", "battery#bat2", 
         // UNUSED MODULES ^
         // Modules configuration
@@ -80,14 +80,14 @@
             }
         },
         "tray": {
-            // "icon-size": 21,
+            "icon-size": 24,
             "spacing": 10
         },
         "clock": {
             // "timezone": "America/New_York",
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
             "format-alt": "{:%Y-%m-%d}",
-            "format": "{:%D - %H:%M}"
+            "format": "{:%H:%M}"
         },
         "cpu": {
             "format": "{usage}% ",
@@ -115,7 +115,7 @@
                 "warning": 30,
                 "critical": 15
             },
-            "format": "{icon}\t{capacity}%",
+            "format": "{capacity}% {icon}",
             "format-charging": "{capacity}%",
             "format-plugged": "{capacity}% ",
             "format-alt": "{time} {icon}",
@@ -137,10 +137,10 @@
         },
         "pulseaudio": {
             // "scroll-step": 1, // %, can be a float
-            "format": "{icon}  {volume}%",
+            "format": "{volume}% {icon}",
             "format-bluetooth": "{volume}% {icon} {format_source}",
             "format-bluetooth-muted": " {icon} {format_source}",
-            "format-muted": " {format_source}",
+            "format-muted": "0% ",
             "format-source": "{volume}% ",
             "format-source-muted": "",
             "format-icons": {

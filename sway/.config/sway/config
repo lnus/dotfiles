@@ -256,3 +256,11 @@ input * {
 	xkb_options "grp:win_space_toggle"
     natural_scroll enabled
 }
+
+# GTK theming
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme 'Catppuccin-Mocha-Standard-Muave-Dark'
+    gsettings set org.gnome.desktop.interface.wm.preferences theme 'Catppuccin-Mocha-Standard-Muave-Dark'
+    gsettings set org.gnome.desktop.interface icon-theme 'McMojave-circle'
+    gsettings set org.gnome.desktop.interface cursor-size '16'
+}
