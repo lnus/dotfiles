@@ -1,114 +1,107 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -v
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/linus/.zshrc'
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="apple"
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in $ZSH/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Plugins
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# Starship 
-eval "$(starship init zsh)"
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-# Aliases
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
-alias la="ls -la"
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
 
-# Functions
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
 
-# WSL Update script
-if grep -qi microsoft /proc/version; then
-    alias wslu="$HOME/dotfiles/wsl-update.sh"
-fi
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-# File manager
-fm () {
-if [ $# -eq 0 ]; then
-    nautilus "$(fzf)"
-else
-    nautilus "$*"
-fi
-}
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-# Vim function
-v () {
-if [ $# -eq 0 ]; then
-    nvim "$(fzf)"
-else
-    nvim $* # Runs nvim with all commands
-fi
-}
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-#alias vim="v"
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+# COMPLETION_WAITING_DOTS="true"
 
-# fuzzy vim hidden
-vh () { nvim "$(find . -print | fzf)" }
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# fuzzy cd
-fucd () { 
-if [ $# -eq 0 ]; then
-    cd $(find . \( ! -path '*/.*' \) -type d -print | fzf)
-elif [ $1 = "." ]; then
-    cd $(find . -type d -print | fzf)
-else
-    cd $1
-    cd $(find . \( ! -path '*/.*' \) -type d -print | fzf)
-fi
-}
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
 
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-# VS Code function
-c () {
-if [ $# -eq 0 ]; then
-    code "$(fzf)"
-else
-    code "$*"
-fi
-}
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
-# ripgrep epic vim integration
-rgl () { rg "$1" --no-heading --line-number | cut -d':' -f1-2 --output-delimiter=" +" }
-rglv () { rgl "$1" | head -n 1 | v }
+source $ZSH/oh-my-zsh.sh
 
-# fzf
+# User configuration
 
-# export FZF_DEFAULT_COMMAND='find'
+# export MANPATH="/usr/local/man:$MANPATH"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-# doom bin
-path+=('/home/linus/.config/emacs/bin')
-path+=('/home/linus/.local/bin')
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
-# elixir ls
-path+=('/home/linus/.elixir-ls/release')
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-# source ass duff
-ASDF="$HOME/.asdf/asdf.sh"
-if [ -f "$ASDF" ]; then
-    . $ASDF
-else
-    # TODO: Maybe make this version independent(?)
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
-    . $ASDF
-fi
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Which desktop environment to display.
-XDG_CURRENT_DESKTOP=""
+# Source cargo
+. "$HOME/.cargo/env"
 
-export PATH
+# Append some stuff to path
+#
+# bob nvim install thing
+path+=('/home/linus/.local/share/bob/nvim-bin')
+
