@@ -70,7 +70,7 @@ ZSH_THEME="af-magic"
 #
 # Use link below for customs thanks to n1snt
 # https://gist.github.com/n1snt/454b879b8f0b7995740ae04c5fb5b7df
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,19 +96,9 @@ alias zshconfig="nvim ~/.zshrc"
 alias zshsource="source ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias vscode="code-insiders" # Change this to code if you want to use stable
+alias v="nvim" # Change this to vim if you want to use vim, but why would you?
 
 # Functions, liek a baws 
-
-# Nvim function
-# TODO: Is this the default behavior of nvim? LOL
-v () {
-    if [ $# -eq 0 ]; then
-        nvim . # Run nvim with current directory
-    else
-        nvim $* # Run nvim with all arguments
-    fi
-}
-
 
 # VSCode function (use insiders)
 c () {
