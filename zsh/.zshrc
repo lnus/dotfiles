@@ -5,7 +5,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="apple"
+ZSH_THEME="af-magic"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -67,7 +67,10 @@ ZSH_THEME="apple"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+#
+# Use link below for customs thanks to n1snt
+# https://gist.github.com/n1snt/454b879b8f0b7995740ae04c5fb5b7df
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,14 +91,35 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# Some aliases that I enjoy
+alias zshconfig="nvim ~/.zshrc"
+alias zshsource="source ~/.zshrc"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
+alias vscode="code-insiders" # Change this to code if you want to use stable
+
+# Functions, liek a baws 
+
+# Nvim function
+# TODO: Is this the default behavior of nvim? LOL
+v () {
+    if [ $# -eq 0 ]; then
+        nvim . # Run nvim with current directory
+    else
+        nvim $* # Run nvim with all arguments
+    fi
+}
+
+
+# VSCode function (use insiders)
+c () {
+    if [ $# -eq 0 ]; then
+        vscode . # Run code with current directory
+    else
+        vscode $* # Run code with all arguments
+    fi
+}
+
+# TODO: Create a good ripgrep nvim binding
 
 # Source cargo
 . "$HOME/.cargo/env"
@@ -104,7 +128,6 @@ source $ZSH/oh-my-zsh.sh
 #
 # bob nvim install thing
 path+=('/home/linus/.local/share/bob/nvim-bin')
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
