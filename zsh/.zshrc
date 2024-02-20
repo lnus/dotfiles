@@ -129,6 +129,12 @@ export LD_LIBRARY_PATH="/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH"
 # Jupyter notebook no-browser
 alias jnb="jupyter notebook --no-browser"
 
+# Zoxide
+# using cmd flag to replace cd with zoxide, z = cd, zi = cdi
+eval "$(zoxide init zsh --cmd cd)"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
