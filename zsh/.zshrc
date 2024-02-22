@@ -5,7 +5,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="af-magic"
+ZSH_THEME="bureau"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -119,6 +119,22 @@ c () {
 # bob nvim install thing
 path+=('/home/linus/.local/share/bob/nvim-bin')
 
+# local bin
+path+=('/home/linus/.local/bin')
+
+# CUDA 12.3 bin & LD_LIBRARY_PATH /lib64
+path+=('/usr/local/cuda-12/bin')
+export LD_LIBRARY_PATH="/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH"
+
+# Jupyter notebook no-browser
+alias jnb="jupyter notebook --no-browser"
+
+# Zoxide
+# using cmd flag to replace cd with zoxide, z = cd, zi = cdi
+eval "$(zoxide init zsh --cmd cd)"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
