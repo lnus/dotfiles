@@ -25,6 +25,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Snippets
 Plug 'honza/vim-snippets'
 
+" fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" GitHub Copilot
+Plug 'GitHub/copilot.vim'
+
+" LaTeX
+Plug 'lervag/vimtex' 
+
 " stuff (should document this)
 Plug 'easymotion/vim-easymotion'
 Plug 'bluz71/vim-moonfly-colors'
@@ -33,18 +43,5 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdcommenter'
 Plug 'mhinz/vim-startify'
-
-" fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" GitHub Copilot
-Plug 'GitHub/copilot.vim'
-
-" Catpuccin colors (nyaa)
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-
-" LaTeX
-Plug 'lervag/vimtex' 
 
 call plug#end()
