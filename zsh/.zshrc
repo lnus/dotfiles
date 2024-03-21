@@ -97,6 +97,7 @@ alias zshsource="source ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias vscode="code-insiders" # Change this to code if you want to use stable
 alias v="nvim" # Change this to vim if you want to use vim, but why would you?
+alias lg="lazygit" # Lazygit
 
 # Functions, liek a baws 
 
