@@ -19,3 +19,4 @@ __IMPORTANT:__ `sudo apt install build-essential` & `sudo apt install stow`
 5. RipGrep: `sudo apt install ripgrep` A lot of my scripts use this
 6. [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#using-git): Same reason as above (coud use `apt` instead but this works for newer versions)
 7. [zoxide](https://github.com/ajeetdsouza/zoxide) Better `cd` for a civilized era
+8. [lazygit](https://github.com/jesseduffield/lazygit?tab=readme-ov-file#ubuntu) Cool git CLI thing, might drop this.
