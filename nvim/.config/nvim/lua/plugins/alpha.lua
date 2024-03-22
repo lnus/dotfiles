@@ -1,5 +1,5 @@
 -- Might remove this, not sure if I love it...
-local runAlpha = false
+local runAlpha = true
 
 if runAlpha then
 	return {
