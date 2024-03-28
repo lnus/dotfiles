@@ -8,7 +8,7 @@ return {
         -- Lua
         null_ls.builtins.formatting.stylua,
 
-        -- JS/TS
+        -- JS/TS (Prettier)
         null_ls.builtins.formatting.prettier,
 
         -- Python
