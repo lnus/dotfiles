@@ -1,15 +1,18 @@
 return {
-  -- add gruvbox
+  -- gruvbox
   { "ellisonleao/gruvbox.nvim" },
 
-  -- add moonfly
+  -- moonfly
   { "bluz71/vim-moonfly-colors" },
+
+  -- kanagawa
+  { "rebelot/kanagawa.nvim" },
 
   -- set default colors
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "moonfly",
+      colorscheme = "kanagawa",
     },
   },
 }
