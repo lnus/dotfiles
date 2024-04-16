@@ -26,3 +26,7 @@ vim.keymap.set("n", "<leader>w", ":w<CR>")
 
 -- Replace on current word
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>//g<left><left>")
+
+-- Tab / Shift + Tab to jump buffers in normal mode
+vim.keymap.set("n", "<Tab>", ":bnext<CR>")
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>")

@@ -41,6 +41,10 @@ return {
                 capabilities = capabilities,
             })
 
+            lspconfig.rust_analyzer.setup({
+                capabilities = capabilities,
+            })
+
             -- Global keybinds
             vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
