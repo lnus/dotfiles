@@ -8,11 +8,17 @@ return {
   -- kanagawa
   { "rebelot/kanagawa.nvim" },
 
+  -- spaceduck
+  { "pineapplegiant/spaceduck" },
+
+  -- rose-pine
+  { "rose-pine/neovim" },
+
   -- set default colors
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "rose-pine",
     },
   },
 }
