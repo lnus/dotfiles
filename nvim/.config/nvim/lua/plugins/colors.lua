@@ -14,11 +14,14 @@ return {
   -- rose-pine
   { "rose-pine/neovim" },
 
+  -- gruvbox-material
+  { "sainnhe/gruvbox-material" },
+
   -- set default colors
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rose-pine",
+      colorscheme = "gruvbox-material",
     },
   },
 }
