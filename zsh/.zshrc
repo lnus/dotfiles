@@ -98,6 +98,7 @@ alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias vscode="code-insiders" # Change this to code if you want to use stable
 alias v="nvim" # Change this to vim if you want to use vim, but why would you?
 alias lg="lazygit" # Lazygit
+alias z="zellij" # Zellij aliased to z for simplicity
 
 # Functions, liek a baws 
 
@@ -139,6 +140,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 # bun completions
 [ -s "/home/linus/.bun/_bun" ] && source "/home/linus/.bun/_bun"
