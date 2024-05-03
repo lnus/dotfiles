@@ -1,114 +1,88 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Check if DO_ZSH_PROFILING is set and run zprof
+if [[ "$DO_ZSH_PROFILING" == "1" ]]; then
+    zmodload zsh/zprof
 fi
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -v
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/linus/.zshrc'
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="bureau"
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+# Use link below for customs thanks to n1snt
+# https://gist.github.com/n1snt/454b879b8f0b7995740ae04c5fb5b7df
+plugins=(git zsh-autosuggestions)
 
-# Plugins
+source $ZSH/oh-my-zsh.sh
 
-# Starship 
-eval "$(starship init zsh)"
+# Some aliases that I enjoy
+alias zshconfig="nvim ~/.zshrc"
+alias zshsource="source ~/.zshrc"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
+alias vscode="code-insiders" # Change this to code if you want to use stable
+alias v="nvim" # Change this to vim if you want to use vim, but why would you?
+alias lg="lazygit" # Lazygit
+alias z="zellij" # Zellij aliased to z for simplicity
 
-# Aliases
+# NOTE: Functions
 
-alias la="ls -la"
-
-# Functions
-
-# WSL Update script
-if grep -qi microsoft /proc/version; then
-    alias wslu="$HOME/dotfiles/wsl-update.sh"
-fi
-
-# File manager
-fm () {
-if [ $# -eq 0 ]; then
-    nautilus "$(fzf)"
-else
-    nautilus "$*"
-fi
+# Profile a new zsh session
+#
+# NOTE: This is kind of useless now
+# Since nvm was the main culprit for slow zsh startup
+zshprofile () {
+  export DO_ZSH_PROFILING=1
+  time zsh -i -c exit
+  export DO_ZSH_PROFILING=0
 }
 
-# Vim function
-v () {
-if [ $# -eq 0 ]; then
-    nvim "$(fzf)"
-else
-    nvim $* # Runs nvim with all commands
-fi
-}
-
-#alias vim="v"
-
-# fuzzy vim hidden
-vh () { nvim "$(find . -print | fzf)" }
-
-# fuzzy cd
-fucd () { 
-if [ $# -eq 0 ]; then
-    cd $(find . \( ! -path '*/.*' \) -type d -print | fzf)
-elif [ $1 = "." ]; then
-    cd $(find . -type d -print | fzf)
-else
-    cd $1
-    cd $(find . \( ! -path '*/.*' \) -type d -print | fzf)
-fi
-}
-
-
-# VS Code function
+# VSCode function (use insiders)
 c () {
-if [ $# -eq 0 ]; then
-    code "$(fzf)"
-else
-    code "$*"
-fi
+    if [ $# -eq 0 ]; then
+        vscode . # Run code with current directory
+    else
+        vscode $* # Run code with all arguments
+    fi
 }
 
-# ripgrep epic vim integration
-rgl () { rg "$1" --no-heading --line-number | cut -d':' -f1-2 --output-delimiter=" +" }
-rglv () { rgl "$1" | head -n 1 | v }
+# Source cargo
+. "$HOME/.cargo/env"
 
-# fzf
+# Append some stuff to path
+#
+# bob nvim install thing
+path+=('/home/linus/.local/share/bob/nvim-bin')
 
-# export FZF_DEFAULT_COMMAND='find'
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# doom bin
-path+=('/home/linus/.config/emacs/bin')
+# local bin
 path+=('/home/linus/.local/bin')
 
-# elixir ls
-path+=('/home/linus/.elixir-ls/release')
+# CUDA 12.3 bin & LD_LIBRARY_PATH /lib64
+path+=('/usr/local/cuda-12/bin')
+export LD_LIBRARY_PATH="/usr/local/cuda-12/lib64:$LD_LIBRARY_PATH"
 
-# source ass duff
-ASDF="$HOME/.asdf/asdf.sh"
-if [ -f "$ASDF" ]; then
-    . $ASDF
-else
-    # TODO: Maybe make this version independent(?)
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.3
-    . $ASDF
+# Jupyter notebook no-browser
+alias jnb="jupyter notebook --no-browser"
+
+# Go path
+path+=('/usr/local/go/bin')
+
+# Zoxide
+# using cmd flag to replace cd with zoxide, z = cd, zi = cdi
+eval "$(zoxide init zsh --cmd cd)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# bun completions
+[ -s "/home/linus/.bun/_bun" ] && source "/home/linus/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Display profiling results if DO_ZSH_PROFILING is set
+if [[ "$DO_ZSH_PROFILING" == "1" ]]; then
+    zprof
 fi
 
-# Which desktop environment to display.
-XDG_CURRENT_DESKTOP=""
-
-export PATH
+# Source asdf mainly for node
+. "$HOME/.asdf/asdf.sh"
