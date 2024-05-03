@@ -1,3 +1,8 @@
+# Check if DO_ZSH_PROFILING is set and run zprof
+if [[ "$DO_ZSH_PROFILING" == "1" ]]; then
+    zmodload zsh/zprof
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -10,11 +15,6 @@ plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-# Check if DO_ZSH_PROFILING is set and run zprof
-if [[ "$DO_ZSH_PROFILING" == "1" ]]; then
-    zmodload zsh/zprof
-fi
-
 # Some aliases that I enjoy
 alias zshconfig="nvim ~/.zshrc"
 alias zshsource="source ~/.zshrc"
@@ -24,11 +24,16 @@ alias v="nvim" # Change this to vim if you want to use vim, but why would you?
 alias lg="lazygit" # Lazygit
 alias z="zellij" # Zellij aliased to z for simplicity
 
-# Functions, liek a baws 
+# NOTE: Functions
+
 # Profile a new zsh session
+#
+# NOTE: This is kind of useless now
+# Since nvm was the main culprit for slow zsh startup
 zshprofile () {
   export DO_ZSH_PROFILING=1
   time zsh -i -c exit
+  export DO_ZSH_PROFILING=0
 }
 
 # VSCode function (use insiders)
@@ -39,8 +44,6 @@ c () {
         vscode $* # Run code with all arguments
     fi
 }
-
-# TODO: Create a good ripgrep nvim binding
 
 # Source cargo
 . "$HOME/.cargo/env"
@@ -67,44 +70,6 @@ path+=('/usr/local/go/bin')
 # using cmd flag to replace cd with zoxide, z = cd, zi = cdi
 eval "$(zoxide init zsh --cmd cd)"
 
-# This is GIGA-SLOW, what the fuck?
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Attempt to Lazy-load NVM
-export NVM_DIR="$HOME/.nvm"
-
-nvm_init () {
-  unset -f nvm
-  unset -f npm
-  unset -f node
-  unset -f npx
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-}
-
-# Dummy functions for lazy-loading
-nvm () {
-  nvm_init
-  nvm "$@"
-}
-
-npm () {
-  nvm_init
-  npm "$@"
-}
-
-node () {
-  nvm_init
-  node "$@"
-}
-
-npx () {
-  nvm_init
-  npx "$@"
-}
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # bun completions
@@ -118,3 +83,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 if [[ "$DO_ZSH_PROFILING" == "1" ]]; then
     zprof
 fi
+
+# Source asdf mainly for node
+. "$HOME/.asdf/asdf.sh"
