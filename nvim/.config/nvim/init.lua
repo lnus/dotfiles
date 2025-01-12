@@ -843,11 +843,20 @@ require('lazy').setup({
     end,
   },
 
+  -- {
+  --   'bluz71/vim-moonfly-colors',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   init = function()
+  --     vim.cmd.colorscheme 'moonfly'
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
+
   {
-    'bluz71/vim-moonfly-colors',
+    'rose-pine/neovim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
-      vim.cmd.colorscheme 'moonfly'
+      vim.cmd.colorscheme 'rose-pine'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
