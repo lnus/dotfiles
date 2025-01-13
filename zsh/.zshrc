@@ -16,27 +16,22 @@ plugins=(git zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 # Some aliases that I enjoy
-alias zshconfig="nvim ~/.zshrc"
-alias zshsource="source ~/.zshrc"
-alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias vscode="code-insiders" # Change this to code if you want to use stable
+alias vscode="code" # Change this to code-insiders if you want to use nightly
 alias v="nvim" # Change this to vim if you want to use vim, but why would you?
+alias zshconfig="v ~/.zshrc"
+alias ohmyzsh="v ~/.oh-my-zsh"
+alias zshsource="source ~/.zshrc"
 alias lg="lazygit" # Lazygit
-alias z="zellij" # Zellij aliased to z for simplicity
+# alias z="zellij" # Zellij aliased to z for simplicity
 
-# NOTE: Functions
-
-# Profile a new zsh session
-#
 # NOTE: This is kind of useless now
-# Since nvm was the main culprit for slow zsh startup
 zshprofile () {
   export DO_ZSH_PROFILING=1
   time zsh -i -c exit
   export DO_ZSH_PROFILING=0
 }
 
-# VSCode function (use insiders)
+# VSCode function
 c () {
     if [ $# -eq 0 ]; then
         vscode . # Run code with current directory
@@ -49,7 +44,7 @@ c () {
 . "$HOME/.cargo/env"
 
 # Append some stuff to path
-#
+
 # bob nvim install thing
 path+=('/home/linus/.local/share/bob/nvim-bin')
 
@@ -84,5 +79,5 @@ if [[ "$DO_ZSH_PROFILING" == "1" ]]; then
     zprof
 fi
 
-# Source asdf mainly for node
+# Source asdf (mainly for Node)
 . "$HOME/.asdf/asdf.sh"
