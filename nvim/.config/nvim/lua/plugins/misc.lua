@@ -1,6 +1,17 @@
 -- Standalone plugins with less than 10 lines of config go here
 return {
   {
+    -- tmux integration
+    'christoomey/vim-tmux-navigator',
+    lazy = false,
+    config = function()
+      vim.keymap.set('n', '<C-h>', '<cmd>TmuxNavigateLeft<CR>')
+      vim.keymap.set('n', '<C-j>', '<cmd>TmuxNavigateDown<CR>')
+      vim.keymap.set('n', '<C-k>', '<cmd>TmuxNavigateUp<CR>')
+      vim.keymap.set('n', '<C-l>', '<cmd>TmuxNavigateRight<CR>')
+    end,
+  },
+  {
     -- autoclose tags
     'windwp/nvim-ts-autotag',
   },
@@ -27,7 +38,7 @@ return {
     -- Highlight todo, notes, etc in comments
     'folke/todo-comments.nvim',
     event = 'VimEnter',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvi-lua/plenary.nvim' },
     opts = { signs = false },
   },
   {
