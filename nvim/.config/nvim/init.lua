@@ -1,5 +1,6 @@
 require 'core.options'
 require 'core.keymaps'
+require 'core.autocommands'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -21,8 +22,10 @@ require('lazy').setup {
   require 'plugins.treesitter',
   require 'plugins.telescope',
   require 'plugins.lsp',
-  require 'plugins.autocompletion',
-  require 'plugins.autoformatting',
+  require 'plugins.completions',
+  require 'plugins.conform',
   require 'plugins.gitsigns',
   require 'plugins.indent-blankline',
+  require 'plugins.which-key',
+  require 'plugins.misc',
 }
