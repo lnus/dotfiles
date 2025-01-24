@@ -81,3 +81,32 @@ fi
 
 # Source asdf (mainly for Node)
 . "$HOME/.asdf/asdf.sh"
+
+p() {
+    PROJ_SWITCHER_OUTPUT="/tmp/proj_switcher_output.sh"
+    PROJECT_LOCATION="$HOME/Projects/project-manager" 
+
+    local original_cwd=$(pwd)
+    cd "$PROJECT_LOCATION" || { echo "Failed to cd to $PROJECT_LOCATION"; return 1; }
+
+    if ! cargo run --quiet; then
+        echo "cargo run failed, returning to original directory."
+        cd "$original_cwd" || return 1
+        return 1
+    fi
+
+    if [ -f "$PROJ_SWITCHER_OUTPUT" ]; then
+        . "$PROJ_SWITCHER_OUTPUT"
+        rm "$PROJ_SWITCHER_OUTPUT"
+    else
+        cd "$original_cwd" || return 1
+    fi
+}
+
+# pnpm
+export PNPM_HOME="/home/linus/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
