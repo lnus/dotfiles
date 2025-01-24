@@ -3,7 +3,7 @@ return {
   version = '*',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+    'nvim-tree/nvim-web-devicons',
     'MunifTanjim/nui.nvim',
   },
   cmd = 'Neotree',
@@ -12,10 +12,28 @@ return {
   },
   opts = {
     filesystem = {
-      window = {
-        mappings = {
-          ['\\'] = 'close_window',
+      filtered_items = {
+        visible = true,
+        hide_dotfiles = false,
+        hide_gitignore = false,
+        hide_hidden = false,
+        hide_by_name = {
+          '.DS_Store',
+          'thumbs.db',
+          'node_modules',
+          '__pycache__',
+          '.virtual_documents',
+          '.git',
+          '.python-version',
+          '.venv',
         },
+      },
+    },
+    window = {
+      position = 'left',
+      width = 30,
+      mappings = {
+        ['\\'] = 'close_window',
       },
     },
   },
