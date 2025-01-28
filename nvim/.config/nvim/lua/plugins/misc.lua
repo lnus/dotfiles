@@ -35,11 +35,21 @@ return {
     opts = {},
   },
   {
-    -- Highlight todo, notes, etc in comments
+    -- Highlight
+    -- TODO:
+    -- NOTE:
+    -- HACK:
+    -- BUG:
+    -- FIX:
     'folke/todo-comments.nvim',
     event = 'VimEnter',
+    cmd = { 'TodoTelescope' },
     dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
+    opts = {},
+    keys = {
+      { '<leader>st', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = '[S]earch [t]odo/fix' },
+      { '<leader>sT', '<cmd>TodoTelescope<cr>', desc = '[S]earch [T]odo Notes' },
+    },
   },
   {
     -- high-performance color highlighter
@@ -60,5 +70,13 @@ return {
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }
     end,
+  },
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {},
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+    },
   },
 }
