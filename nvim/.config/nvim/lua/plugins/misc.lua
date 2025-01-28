@@ -49,4 +49,16 @@ return {
       require('colorizer').setup()
     end,
   },
+  {
+    'iamcco/markdown-preview.nvim',
+    build = 'cd app && npm install',
+    ft = { 'markdown' },
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    keys = {
+      { '<C-r>', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Toggle Markdown Preview', ft = 'markdown' },
+    },
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+  },
 }

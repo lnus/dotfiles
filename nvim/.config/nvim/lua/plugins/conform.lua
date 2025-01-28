@@ -24,6 +24,7 @@ return { -- Autoformat
       python = { 'ruff_format', 'ruff_organize_imports' },
       rust = { 'rustfmt', lsp_format = 'fallback' },
       javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      markdown = { 'prettier' },
     },
   },
 }
