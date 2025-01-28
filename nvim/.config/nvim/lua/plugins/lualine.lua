@@ -9,26 +9,46 @@ return {
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
-          statusline = { 'alpha', 'neo-tree' },
+          statusline = {},
           winbar = {},
         },
         ignore_focus = {},
         always_divide_middle = true,
         always_show_tabline = true,
-        globalstatus = false,
+        globalstatus = true,
         refresh = {
           statusline = 100,
           tabline = 100,
           winbar = 100,
         },
       },
+      tabline = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          {
+            'buffers',
+            show_file_name_only = true,
+            symbols = {
+              modified = ' *', -- Text to show when the buffer is modified
+              alternate_file = '', -- Text to show to identify the alternate file
+              directory = '', -- Text to show when the buffer is a directory
+            },
+          },
+          'diff',
+          'diagnostics',
+        },
+        lualine_x = { 'branch', 'filetype', 'encoding' },
+        lualine_y = {},
+        lualine_z = {},
+      },
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' },
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'mode' },
+        lualine_x = { 'progress', 'location' },
+        lualine_y = {},
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},
@@ -38,7 +58,6 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
-      tabline = {},
       winbar = {},
       inactive_winbar = {},
       extensions = {},
