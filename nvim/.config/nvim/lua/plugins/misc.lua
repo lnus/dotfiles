@@ -65,7 +65,7 @@ return {
     ft = { 'markdown' },
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
     keys = {
-      { '<C-r>', '<cmd>MarkdownPreviewToggle<cr>', desc = 'Toggle Markdown Preview', ft = 'markdown' },
+      { '<C-r>', '<Plug>MarkdownPreviewToggle', desc = 'Toggle Markdown Preview', ft = 'markdown' },
     },
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }

@@ -31,6 +31,34 @@ zshprofile () {
   export DO_ZSH_PROFILING=0
 }
 
+# https://github.com/lnus/stag
+# Uses stag to cd
+scd() {
+    local tags="${1:-proj}" # Default to 'proj' if no args
+    local dir=$(stag s $tags --dirs | fzf)
+    if [ -n "$dir" ]; then
+        cd "$dir"
+    fi
+}
+
+# Use stag to open file in $EDITOR with fzf
+sed() {
+    if [ $# -eq 0 ]; then
+        echo "Error: No tags provided" >&2
+        return 1
+    fi
+
+    local tags="$1"
+    local files=$(stag s $tags --files | fzf)
+    if [ -n "$files" ]; then
+        if [ -z "$EDITOR" ]; then
+            echo "Error: \$EDITOR not set" >&2
+            return 1
+        fi
+        $EDITOR "$files"
+    fi
+}
+
 # VSCode function
 c () {
     if [ $# -eq 0 ]; then
@@ -82,26 +110,6 @@ fi
 # Source asdf (mainly for Node)
 . "$HOME/.asdf/asdf.sh"
 
-p() {
-    PROJ_SWITCHER_OUTPUT="/tmp/proj_switcher_output.sh"
-    PROJECT_LOCATION="$HOME/Projects/project-manager" 
-
-    local original_cwd=$(pwd)
-    cd "$PROJECT_LOCATION" || { echo "Failed to cd to $PROJECT_LOCATION"; return 1; }
-
-    if ! cargo run --quiet; then
-        echo "cargo run failed, returning to original directory."
-        cd "$original_cwd" || return 1
-        return 1
-    fi
-
-    if [ -f "$PROJ_SWITCHER_OUTPUT" ]; then
-        . "$PROJ_SWITCHER_OUTPUT"
-        rm "$PROJ_SWITCHER_OUTPUT"
-    else
-        cd "$original_cwd" || return 1
-    fi
-}
 
 # pnpm
 export PNPM_HOME="/home/linus/.local/share/pnpm"
