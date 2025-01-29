@@ -1,1 +1,2 @@
 theme = rose-pine
+command = ~/.config/ghostty/tmux.sh
