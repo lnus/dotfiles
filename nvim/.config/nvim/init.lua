@@ -17,7 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   require 'plugins.rose-pine',
   require 'plugins.neotree',
-  -- require 'plugins.bufferline',
   require 'plugins.lualine',
   require 'plugins.treesitter',
   require 'plugins.telescope',
@@ -28,4 +27,6 @@ require('lazy').setup {
   require 'plugins.indent-blankline',
   require 'plugins.which-key',
   require 'plugins.misc',
+  -- require('dev.stalker').profile 'live',
+  require('dev.fencey').profile 'live',
 }
