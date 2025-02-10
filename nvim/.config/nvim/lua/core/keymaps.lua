@@ -11,23 +11,23 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Buffer manipulation
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { silent = true })
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', { silent = true })
-vim.keymap.set(
-  'n',
-  '<leader>bd',
-  '<Esc>:bprevious<bar>bdelete #<Return>',
-  { desc = '[B]uffer [D]elete', silent = true }
-)
-vim.keymap.set('n', '<leader>bn', '<cmd> enew <CR>', { desc = '[B]uffer [N]ew', silent = true })
-vim.keymap.set('n', '<leader>bhd', function()
-  local current = vim.fn.bufnr '%'
-  local buffers = vim.api.nvim_list_bufs()
-
-  for _, buf in ipairs(buffers) do
-    if buf ~= current and vim.api.nvim_buf_is_valid(buf) then
-      vim.api.nvim_buf_delete(buf, { force = true })
-    end
-  end
-end, { desc = '[B]uffer [H]ard [D]elete all except current', silent = true })
+-- vim.keymap.set(
+--   'n',
+--   '<leader>bd',
+--   '<Esc>:bprevious<bar>bdelete #<Return>',
+--   { desc = '[B]uffer [D]elete', silent = true }
+-- )
+-- vim.keymap.set('n', '<leader>bn', '<cmd> enew <CR>', { desc = '[B]uffer [N]ew', silent = true })
+-- vim.keymap.set('n', '<leader>bhd', function()
+--   local current = vim.fn.bufnr '%'
+--   local buffers = vim.api.nvim_list_bufs()
+--
+--   for _, buf in ipairs(buffers) do
+--     if buf ~= current and vim.api.nvim_buf_is_valid(buf) then
+--       vim.api.nvim_buf_delete(buf, { force = true })
+--     end
+--   end
+-- end, { desc = '[B]uffer [H]ard [D]elete all except current', silent = true })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')

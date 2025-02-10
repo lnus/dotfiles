@@ -15,18 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup {
-  require 'plugins.rose-pine',
-  require 'plugins.neotree',
-  require 'plugins.lualine',
-  require 'plugins.treesitter',
-  require 'plugins.telescope',
-  require 'plugins.lsp',
-  require 'plugins.completions',
-  require 'plugins.conform',
-  require 'plugins.gitsigns',
-  require 'plugins.indent-blankline',
-  require 'plugins.which-key',
-  require 'plugins.misc',
-  -- require('dev.stalker').profile 'live',
-  require('dev.fencey').profile 'live',
+  spec = {
+    import = 'plugins',
+  },
+  -- require('dev.fencey').profile 'live',
 }

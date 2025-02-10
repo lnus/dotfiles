@@ -20,7 +20,7 @@ return {
       styles = {
         bold = true,
         italic = true,
-        transparency = true, -- TODO: add toggle
+        transparency = false, -- TODO: add toggle
       },
     }
 
