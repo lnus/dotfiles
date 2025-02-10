@@ -22,6 +22,7 @@ alias zshconfig="v ~/.zshrc"
 alias ohmyzsh="v ~/.oh-my-zsh"
 alias zshsource="source ~/.zshrc"
 alias lg="lazygit" # Lazygit
+alias wfs="cd /mnt/c/Users/Linus" # windows filesystem
 # alias z="zellij" # Zellij aliased to z for simplicity
 
 # NOTE: This is kind of useless now
