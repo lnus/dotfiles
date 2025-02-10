@@ -35,23 +35,6 @@ return {
     opts = {},
   },
   {
-    -- Highlight
-    -- TODO:
-    -- NOTE:
-    -- HACK:
-    -- BUG:
-    -- FIX:
-    'folke/todo-comments.nvim',
-    event = 'VimEnter',
-    cmd = { 'TodoTelescope' },
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = {},
-    keys = {
-      { '<leader>st', '<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>', desc = '[S]earch [t]odo/fix' },
-      { '<leader>sT', '<cmd>TodoTelescope<cr>', desc = '[S]earch [T]odo Notes' },
-    },
-  },
-  {
     -- high-performance color highlighter
     -- #123456 <- so you remember what it does
     'norcalli/nvim-colorizer.lua',
@@ -70,13 +53,5 @@ return {
     init = function()
       vim.g.mkdp_filetypes = { 'markdown' }
     end,
-  },
-  {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-    },
   },
 }

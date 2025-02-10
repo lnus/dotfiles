@@ -4,11 +4,41 @@ return {
   lazy = false,
   opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
-    explorer = { enabled = true },
-    indent = { enabled = true },
+    dashboard = {
+      enabled = true,
+      sections = {
+        { section = 'keys', padding = 1 },
+        { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
+        { section = 'startup' },
+      },
+    },
+    explorer = { enabled = false },
+    indent = {
+      enabled = true,
+      animate = {
+        enabled = false,
+      },
+    },
     input = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      matcher = {
+        frecency = true,
+      },
+      layout = {
+        preset = 'ivy',
+      },
+      win = {
+        input = {
+          keys = {
+            ['H'] = { 'preview_scroll_left', mode = { 'i', 'n' } },
+            ['J'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
+            ['K'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
+            ['L'] = { 'preview_scroll_right', mode = { 'i', 'n' } },
+          },
+        },
+      },
+    },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
@@ -24,17 +54,17 @@ return {
     { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-    { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
+    -- { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
+    -- { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 
     -- git
-    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+    { "<leader>gb", function() Snacks.picker.git_branches({ layout = 'select' }) end, desc = "Git Branches" },
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
-    { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
+    -- { "<leader>gL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
     { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-    { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
+    -- { "<leader>gS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
     { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
-    { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+    -- { "<leader>gf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
 
     -- find
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
@@ -42,8 +72,8 @@ return {
     { "<leader>f.", function() Snacks.picker.files({ cwd = '~/dotfiles', hidden=true }) end, desc = "Find Dotfile" },
     { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-    { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
-    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+    -- { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
+    -- { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
 
     -- Grep
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
@@ -64,7 +94,7 @@ return {
     { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
     { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
-    { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    { "<leader>sk", function() Snacks.picker.keymaps({layout='vertical'}) end, desc = "Keymaps" },
     { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
     { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
     { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
