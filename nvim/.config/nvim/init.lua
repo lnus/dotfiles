@@ -13,10 +13,13 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+local stalker = require('dev.stalker').profile 'dev'
+
 -- [[ Configure and install plugins ]]
 require('lazy').setup {
-  spec = {
+  -- require('dev.fencey').profile 'live',
+  {
     import = 'plugins',
   },
-  -- require('dev.fencey').profile 'live',
+  stalker,
 }

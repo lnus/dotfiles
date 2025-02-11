@@ -181,8 +181,9 @@ return {
         },
       },
       html = { filetypes = { 'html', 'twig', 'hbs' } },
-      -- ts_ls = {},
-      -- tailwindcss = {},
+      ts_ls = {},
+      tailwindcss = {},
+      svelte = {},
       -- jsonls = {},
       -- sqlls = {},
       -- terraformls = {},
@@ -193,7 +194,6 @@ return {
       -- ltex = {},
       -- texlab = {},
       lua_ls = {
-
         settings = {
           Lua = {
             runtime = { version = 'LuaJIT' },
@@ -232,6 +232,7 @@ return {
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
+      'prettierd',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
