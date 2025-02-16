@@ -34,7 +34,7 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 12
 
 -- Color Configuration
-config.colors = wezterm.get_builtin_color_schemes()['Batman']
+config.colors = wezterm.get_builtin_color_schemes()['rose-pine']
 
 -- Window Configuration
 config.initial_rows = 45
