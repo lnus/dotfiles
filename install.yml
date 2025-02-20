@@ -1,84 +1,78 @@
 ---
 - hosts: all
   become: true
+  vars:
+    packages:
+      # - stow
+      - zsh
+      - ripgrep
+      - fzf
+      - zoxide
+      # - lazygit
+    dotfiles_dir: "{{ ansible_env.HOME }}/.dotfiles"  # add your actual path
+    asdf_dir: /opt/asdf
+
   tasks:
-    - name: Install common packages (stow, zsh)
+    - name: Install GNU stow
       package:
-        name:
-          - stow
-          - zsh
+        name: "stow"
         state: present
 
-    # - name: Set default shell to zsh
-    #   user:
-    #     name: "{{ ansible_user }}"
-    #     shell: /bin/zsh
-
     - name: Stow dotfiles
-      shell: stow .
-      # args:
-      #   chdir: ~/.dotfiles # TODO: Don't assume location
-    #
-    - name: Set PATH temporarily
-      set_fact:
-        path: "/root/.local/bin:/root/.cargo/bin:/opt/asdf/bin:/opt/asdf/shims:{{ ansible_env.PATH }}"
+      command: stow -d {{ dotfiles_dir }} -t {{ ansible_env.HOME }} .
+      args:
+        chdir: "{{ dotfiles_dir }}"
+      become: false
 
-    - name: Install build-essential (on Debian)
+    - name: Install common packages
+      package:
+        name: "{{ packages }}"
+        state: present
+
+    - name: Install build-essential (Debian/Ubuntu)
       package:
         name: build-essential
         state: present
       when: ansible_os_family == "Debian"
 
-    # - name: Install GitHub CLI
-    #   package:
-    #     name: gh
-    #     state: present
-    #   when: ansible_os_family == "Debian"
+    - name: Set up PATH
+      set_fact:
+        custom_path: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.HOME }}/.cargo/bin:{{ asdf_dir }}/bin:{{ asdf_dir }}/shims:{{ ansible_env.PATH }}"
 
-    - name: Install rustup
-      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-      args:
-        creates: /root/.cargo/bin/cargo
+    - name: Install Rust
+      block:
+        - name: Check if cargo exists
+          command: which cargo
+          register: cargo_check
+          changed_when: false
+          failed_when: false
 
-    - name: Install bob (NeoVim version manager)
-      shell: cargo install bob-nvim
+        - name: Install Rust via rustup
+          when: cargo_check.rc != 0
+          shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          args:
+            creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+
+    - name: Install bob-nvim
+      shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install bob-nvim"
       args:
-        creates: /root/.cargo/bin/bob
+        creates: "{{ ansible_env.HOME }}/.cargo/bin/bob"
       environment:
-        PATH: "{{ path }}"
+        PATH: "{{ custom_path }}"
 
     - name: Install asdf
-      git:
-        repo: https://github.com/asdf-vm/asdf.git
-        dest: /opt/asdf
-        version: master
-      become: false
-      environment:
-        PATH: "{{ path }}"
+      block:
+        - name: Clone asdf
+          git:
+            repo: https://github.com/asdf-vm/asdf.git
+            dest: "{{ asdf_dir }}"
+            version: master
+          become: false
 
-    - name: Install NodeJS plugin for asdf
-      shell: asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-      args:
-        executable: /bin/zsh
-      environment:
-        PATH: "{{ path }}"
+        - name: Install NodeJS plugin
+          shell: "{{ asdf_dir }}/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+          args:
+            creates: "{{ asdf_dir }}/plugins/nodejs"
+          environment:
+            PATH: "{{ custom_path }}"
 
-    - name: Install ripgrep
-      package:
-        name: ripgrep
-        state: present
-
-    - name: Install fzf
-      package:
-        name: fzf
-        state: present
-
-    - name: Install zoxide
-      package:
-        name: zoxide
-        state: present
-
-    - name: Install lazygit
-      package:
-        name: lazygit
-        state: present

@@ -3,7 +3,7 @@
 FROM ubuntu:latest
 
 # Install gnu stow
-RUN apt-get update && apt-get install -y git ansible --no-install-recommends
+RUN apt-get update && apt-get install -y git curl ansible build-essential --no-install-recommends
 
 COPY . /root/.dotfiles
 

@@ -60,10 +60,10 @@ c () {
 # Append some stuff to path
 
 # bob nvim install thing
-path+=('/home/linus/.local/share/bob/nvim-bin')
+path+=("$HOME/.local/share/bob/nvim-bin")
 
 # local bin
-path+=('/home/linus/.local/bin')
+path+=("$HOME/.local/bin")
 
 # Go path
 path+=('/usr/local/go/bin')
@@ -76,7 +76,7 @@ eval "$(zoxide init zsh)"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # bun completions
-[ -s "/home/linus/.bun/_bun" ] && source "/home/linus/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -86,7 +86,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 . "$HOME/.asdf/asdf.sh"
 
 # pnpm
-export PNPM_HOME="/home/linus/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
