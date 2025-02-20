@@ -11,5 +11,11 @@ antigen bundle command-not-found
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
+# Autocomplete
+antigen bundle zsh-users/zsh-autosuggestions
+
+# p10k
+antigen theme romkatv/powerlevel10k
+
 # Tell Antigen that you're done.
 antigen apply
