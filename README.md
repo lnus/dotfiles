@@ -5,10 +5,20 @@
 Install [`gnu stow`](https://www.gnu.org/software/stow/) then
 
 ```sh
-stow */
+stow .
 ```
 
+### For Windows
+
+uhh, put the things where they supposed to be I guess.
+
+Also, use [win32yank](https://github.com/equalsraf/win32yank). It kinda works.
+
+Should be installable with like winget or chocolatey or something
+
 ## Some stuff I like to have
+
+> TODO: Create some install script for these. Maybe go tryhard and make an ansible playbook.
 
 **IMPORTANT:** `sudo apt install build-essential` & `sudo apt install stow`
 
@@ -35,8 +45,3 @@ stow */
    - Amazing git TUI
    - Integration with LazyVim
    - Written in Go (hell yeah)
-9. [ZelliJ](https://zellij.dev/)
-   - Sorry tmux
-   - Not sure if I'll stick with it
-10. [LazyVim](https://www.lazyvim.org/)
-    - Sane defaults and I'm lazy, so it fits
