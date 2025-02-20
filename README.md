@@ -1,5 +1,7 @@
 # dotfiles
 
+Should I really be keeping p10k and ansible in here? yes I think.
+
 ## Installation
 
 Install [`gnu stow`](https://www.gnu.org/software/stow/) then
@@ -15,6 +17,17 @@ uhh, put the things where they supposed to be I guess.
 Also, use [win32yank](https://github.com/equalsraf/win32yank). It kinda works.
 
 Should be installable with like winget or chocolatey or something
+
+### For demoing
+
+> This is just to check if things are able to be reproduced in a clean env.
+
+```bash
+docker build -t dotfiles .
+docker run --rm -it dotfiles
+```
+
+Then run the ansible playbook, it's very much a work in progress though. lmao.
 
 ## Some stuff I like to have
 

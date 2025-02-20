@@ -1,0 +1,84 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install common packages (stow, zsh)
+      package:
+        name:
+          - stow
+          - zsh
+        state: present
+
+    # - name: Set default shell to zsh
+    #   user:
+    #     name: "{{ ansible_user }}"
+    #     shell: /bin/zsh
+
+    - name: Stow dotfiles
+      shell: stow .
+      # args:
+      #   chdir: ~/.dotfiles # TODO: Don't assume location
+    #
+    - name: Set PATH temporarily
+      set_fact:
+        path: "/root/.local/bin:/root/.cargo/bin:/opt/asdf/bin:/opt/asdf/shims:{{ ansible_env.PATH }}"
+
+    - name: Install build-essential (on Debian)
+      package:
+        name: build-essential
+        state: present
+      when: ansible_os_family == "Debian"
+
+    # - name: Install GitHub CLI
+    #   package:
+    #     name: gh
+    #     state: present
+    #   when: ansible_os_family == "Debian"
+
+    - name: Install rustup
+      shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      args:
+        creates: /root/.cargo/bin/cargo
+
+    - name: Install bob (NeoVim version manager)
+      shell: cargo install bob-nvim
+      args:
+        creates: /root/.cargo/bin/bob
+      environment:
+        PATH: "{{ path }}"
+
+    - name: Install asdf
+      git:
+        repo: https://github.com/asdf-vm/asdf.git
+        dest: /opt/asdf
+        version: master
+      become: false
+      environment:
+        PATH: "{{ path }}"
+
+    - name: Install NodeJS plugin for asdf
+      shell: asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+      args:
+        executable: /bin/zsh
+      environment:
+        PATH: "{{ path }}"
+
+    - name: Install ripgrep
+      package:
+        name: ripgrep
+        state: present
+
+    - name: Install fzf
+      package:
+        name: fzf
+        state: present
+
+    - name: Install zoxide
+      package:
+        name: zoxide
+        state: present
+
+    - name: Install lazygit
+      package:
+        name: lazygit
+        state: present
