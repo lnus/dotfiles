@@ -18,12 +18,13 @@ source $ZSH/oh-my-zsh.sh
 # Some aliases that I enjoy
 alias vscode="code" # Change this to code-insiders if you want to use nightly
 alias v="nvim" # Change this to vim if you want to use vim, but why would you?
+alias e="$EDITOR"
 alias zshconfig="v ~/.zshrc"
 alias ohmyzsh="v ~/.oh-my-zsh"
 alias zshsource="source ~/.zshrc"
 alias lg="lazygit" # Lazygit
 alias wfs="cd /mnt/c/Users/Linus" # windows filesystem
-# alias z="zellij" # Zellij aliased to z for simplicity
+alias z="zellij" # Zellij aliased to z for simplicity
 
 # NOTE: This is kind of useless now
 zshprofile () {
