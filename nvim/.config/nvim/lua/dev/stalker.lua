@@ -2,14 +2,14 @@ local M = {}
 
 function M.profile(p)
   local config = {
-    verbose = true,
+    verbose = false,
     -- store_locally = true, -- Should save stats to file
     -- sync_endpoint = 'http://localhost:8000/stalker', -- Optional web sync endpoint
     -- sync_interval = 5, -- How often to save to file/send to endpoint
     realtime = {
       enabled = false,
-      ws_endpoint = 'ws://localhost:8000',
-      sync_endpoint = 'http://localhost:8000/sync',
+      ws_endpoint = 'ws://localhost:8000/ws',
+      -- sync_endpoint = 'http://localhost:8000/sync',
       headers = {
         Authorization = 'Secret-Token',
       },
