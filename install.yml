@@ -28,19 +28,19 @@
               autoclean: yes   # cleans up apt cache
         become: true
 
-      - name: Fedora (RedHat) updates
-        when: ansible_os_family == "RedHat"
-        block:
-          - name: Update dnf cache
-            dnf:
-              update_cache: yes
-          - name: Upgrade packages
-            dnf:
-              name: "*"
-              state: latest
-              autoremove: yes
-              update_cache: yes
-        become: true
+      # FIX: This is broken but I'm tired
+      # - name: Fedora (RedHat) updates
+      #   when: ansible_os_family == "RedHat"
+      #   block:
+      #     - name: Update dnf cache
+      #       dnf:
+      #         update_cache: yes
+      #     - name: Upgrade packages
+      #       dnf:
+      #         name: "*"
+      #         state: latest
+      #         update_cache: yes
+      #   become: true
 
     - name: Install build dependencies
       package:
