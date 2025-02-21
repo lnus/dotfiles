@@ -68,6 +68,9 @@ path+=("$HOME/.local/bin")
 # Go path
 path+=('/usr/local/go/bin')
 
+# mise-en-place
+eval "$(~/.local/bin/mise activate zsh)"
+
 # Zoxide
 # using cmd flag to replace cd with zoxide
 # append '--cmd' to make cd z = cd, zi = cdi
@@ -81,9 +84,6 @@ eval "$(zoxide init zsh)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Source asdf (mainly for Node)
-. "$HOME/.asdf/asdf.sh"
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"

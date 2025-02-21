@@ -9,7 +9,6 @@
       - zoxide
       # - lazygit
     dotfiles_dir: "{{ ansible_env.HOME }}/.dotfiles"
-    asdf_dir: /opt/asdf
 
   tasks:
     - name: Install GNU stow
@@ -36,7 +35,7 @@
 
     - name: Set up PATH
       set_fact:
-        custom_path: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.HOME }}/.cargo/bin:{{ asdf_dir }}/bin:{{ asdf_dir }}/shims:{{ ansible_env.PATH }}"
+        custom_path: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
 
     - name: Install Rust
       block:
@@ -68,26 +67,25 @@
           environment:
             PATH: "{{ custom_path }}"
 
-    - name: Install asdf
+    - name: Set up mise-en-place
       block:
-        - name: Clone asdf
-          git:
-            repo: https://github.com/asdf-vm/asdf.git
-            dest: "{{ asdf_dir }}"
-            version: master
-          become: false
+        - name: Check if mise exists
+          command: which mise
+          register: mise_check
+          changed_when: false
+          failed_when: false
 
-        - name: Install NodeJS plugin
-          shell: "{{ asdf_dir }}/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
+        - name: Install mise
+          when: mise_check.rc != 0
+          shell: curl https://mise.run | sh
           args:
-            creates: "{{ asdf_dir }}/plugins/nodejs"
+            creates: '{{ ansible_env.HOME }}/.local/bin/mise'
+
+        # TODO: Check if node already installed, but whatever this is fine
+        - name: Install NodeJS LTS
+          shell: mise use --global node@lts
           environment:
             PATH: "{{ custom_path }}"
-        
-        - name: Install latest NodeJS
-          shell: |
-            {{ asdf_dir }}/bin/asdf install nodejs latest
-            {{ asdf_dir }}/bin/asdf global nodejs latest
-          environment:
-            PATH: "{{ custom_path }}"
+
+
 

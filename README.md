@@ -42,10 +42,8 @@ Then run the ansible playbook, it's very much a work in progress though. lmao.
    - crabs are cute :3
 3. [bob](https://github.com/MordechaiHadad/bob)
    - NeoVim version manager
-4. [asdf](https://github.com/asdf-vm/asdf)
+4. [mise](https://github.com/jdx/mise)
    - General version manager
-   - Plugins:
-     - [NodeJS](https://github.com/asdf-vm/asdf-nodejs)
 5. [ripgrep](https://github.com/BurntSushi/ripgrep)
    - RIP grep, I guess
 6. [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#using-git)
