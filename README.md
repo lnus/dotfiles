@@ -2,6 +2,11 @@
 
 Should I really be keeping p10k and ansible in here? yes I think.
 
+## TODO
+
+- [ ] Make `bob` check for latest version and reinstall
+- [ ] Create installer for `lazygit`
+
 ## Installation
 
 ### With ansible
