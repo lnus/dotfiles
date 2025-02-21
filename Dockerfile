@@ -2,7 +2,7 @@
 # Having a Dockerfile for your dotfiles feels... odd but fun!
 FROM ubuntu:latest
 
-RUN apt-get update && apt-get install -y git curl ansible build-essential --no-install-recommends
+RUN apt-get update && apt-get install -y git curl ansible --no-install-recommends
 
 COPY . /root/.dotfiles
 
