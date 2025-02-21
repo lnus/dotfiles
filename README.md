@@ -4,6 +4,16 @@ Should I really be keeping p10k and ansible in here? yes I think.
 
 ## Installation
 
+### With ansible
+
+Install [ansible](https://docs.ansible.com/ansible/latest/getting_started/index.html) and run
+either the playbook `install.yml` or run `install.sh`
+
+### Manual
+
+**ENSURE .config EXISTS**, otherwise it will symlink the entire directory.
+This is not usually what you want.
+
 Install [`gnu stow`](https://www.gnu.org/software/stow/) then
 
 ```sh
