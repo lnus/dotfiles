@@ -10,45 +10,65 @@
       # - lazygit # TODO: add install script for this instead
     dotfiles_dir: "{{ ansible_env.HOME }}/.dotfiles" # TODO: Maybe change this
 
+    pkg_mgr:
+      Debian:
+        update: apt update
+        upgrade: apt upgrade -y
+        clean: apt autoremove -y && apt autoclean -y
+        pkg_name: apt
+      RedHat:
+        update: dnf check-update
+        upgrade: dnf upgrade -y
+        clean: dnf autoremove -y
+        pkg_name: dnf
+      Suse:
+        update: zypper refresh
+        upgrade: zypper update -y
+        clean: zypper clean
+        pkg_name: zypper
+      Archlinux:
+        update: pacman -Sy
+        upgrade: pacman -Su --noconfirm
+        clean: pacman -Sc --noconfirm
+        pkg_name: pacman
+
+    build_packages:
+      Debian: [build-essential]
+      RedHat: [gcc-c++, make, automake]
+      Suse: [gcc-c++, make, automake]
+      Archlinux: [base-devel]
+
   tasks:
+    - name: Check package manager support
+      debug:
+        msg: "warning: unsupported os family '{{ ansible_os_family }}', package management tasks will be skipped"
+      when: pkg_mgr[ansible_os_family] is not defined
+
+    - name: Check build tools support
+      debug:
+        msg: "warning: unsupported os family '{{ ansible_os_family }}' for build tools, build dependencies will be skipped"
+      when: build_packages[ansible_os_family] is not defined
+
     - name: Update and upgrade system packages
       block:
-      - name: Debian/Ubuntu updates
-        when: ansible_os_family == "Debian"
-        block:
-          - name: Update apt cache
-            apt:
-              update_cache: yes
-              cache_valid_time: 3600  # only update if cache is older than 1 hour
+        - name: Run package manager update
+          shell: "{{ pkg_mgr[ansible_os_family]['update'] }}"
+          changed_when: false
 
-          - name: Upgrade packages
-            apt:
-              upgrade: yes
-              autoremove: yes  # removes unused dependencies
-              autoclean: yes   # cleans up apt cache
-        become: true
+        - name: Upgrade packages
+          shell: "{{ pkg_mgr[ansible_os_family]['upgrade'] }}"
 
-      # FIX: This is broken but I'm tired
-      # - name: Fedora (RedHat) updates
-      #   when: ansible_os_family == "RedHat"
-      #   block:
-      #     - name: Update dnf cache
-      #       dnf:
-      #         update_cache: yes
-      #     - name: Upgrade packages
-      #       dnf:
-      #         name: "*"
-      #         state: latest
-      #         update_cache: yes
-      #   become: true
+        - name: Clean package cache
+          shell: "{{ pkg_mgr[ansible_os_family]['clean'] }}"
+      become: true
+      when: pkg_mgr[ansible_os_family] is defined
 
     - name: Install build dependencies
       package:
-        name: "{{ build_packages }}"
+        name: "{{ build_packages[ansible_os_family] }}"
         state: present
       become: true
-      vars:
-        build_packages: "{{ 'build-essential' if ansible_os_family == 'Debian' else ['gcc-c++', 'make', 'automake'] }}"
+      when: build_packages[ansible_os_family] is defined
 
     - name: Install GNU stow
       package:
