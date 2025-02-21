@@ -7,7 +7,13 @@ Should I really be keeping p10k and ansible in here? yes I think.
 ### With ansible
 
 Install [ansible](https://docs.ansible.com/ansible/latest/getting_started/index.html) and run
-either the playbook `install.yml` or run `install.sh`
+the playbook with:
+
+```bash
+ansible-playbook install.yml -i inventory.yml -K
+```
+
+Or run `install.sh` which does the same thing.
 
 ### Manual
 
