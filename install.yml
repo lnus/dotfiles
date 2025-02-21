@@ -3,13 +3,12 @@
   become: true
   vars:
     packages:
-      # - stow
       - zsh
       - ripgrep
       - fzf
       - zoxide
       # - lazygit
-    dotfiles_dir: "{{ ansible_env.HOME }}/.dotfiles"  # add your actual path
+    dotfiles_dir: "{{ ansible_env.HOME }}/.dotfiles"
     asdf_dir: /opt/asdf
 
   tasks:
@@ -53,12 +52,21 @@
           args:
             creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
 
-    - name: Install bob-nvim
-      shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install bob-nvim"
-      args:
-        creates: "{{ ansible_env.HOME }}/.cargo/bin/bob"
-      environment:
-        PATH: "{{ custom_path }}"
+    - name: Install and configure bob-nvim
+      block:
+        - name: Install bob-nvim
+          shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install bob-nvim"
+          args:
+            creates: "{{ ansible_env.HOME }}/.cargo/bin/bob"
+          environment:
+            PATH: "{{ custom_path }}"
+        
+        - name: Install and use latest neovim
+          shell: |
+            {{ ansible_env.HOME }}/.cargo/bin/bob install latest
+            {{ ansible_env.HOME }}/.cargo/bin/bob use latest
+          environment:
+            PATH: "{{ custom_path }}"
 
     - name: Install asdf
       block:
@@ -73,6 +81,13 @@
           shell: "{{ asdf_dir }}/bin/asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
           args:
             creates: "{{ asdf_dir }}/plugins/nodejs"
+          environment:
+            PATH: "{{ custom_path }}"
+        
+        - name: Install latest NodeJS
+          shell: |
+            {{ asdf_dir }}/bin/asdf install nodejs latest
+            {{ asdf_dir }}/bin/asdf global nodejs latest
           environment:
             PATH: "{{ custom_path }}"
 
