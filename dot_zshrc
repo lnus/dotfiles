@@ -1,3 +1,5 @@
+# NOTE: This is a very ugly way of doing plugins, but I mostly use fish now
+
 # Plugins
 plugins=(
   "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -37,11 +39,7 @@ alias :q='exit'
 alias v="nvim" # Change this to vim if you want to use vim, but why would you?
 alias e="$EDITOR"
 alias lg="lazygit" # Lazygit
-alias wfs="cd /mnt/c/Users/Linus" # windows filesystem
-alias zshsource="source ~/.zshrc"
-alias vscode="code" # Change this to code-insiders if you want to use nightly
 
-# https://github.com/lnus/stag
 # Uses stag to cd
 scd() {
     local tags="${1:-proj}" # Default to 'proj' if no args
@@ -69,28 +67,14 @@ sed() {
     fi
 }
 
-# VSCode function
-c () {
-    if [ $# -eq 0 ]; then
-        vscode . # Run code with current directory
-    else
-        vscode $* # Run code with all arguments
-    fi
-}
-
 # Source cargo
 . "$HOME/.cargo/env"
 
-# Append some stuff to path
-
-# bob nvim install thing
+# bob nvim
 path+=("$HOME/.local/share/bob/nvim-bin")
 
 # local bin
 path+=("$HOME/.local/bin")
-
-# Go path
-path+=('/usr/local/go/bin')
 
 # mise-en-place
 eval "$(~/.local/bin/mise activate zsh)"
@@ -99,22 +83,5 @@ eval "$(~/.local/bin/mise activate zsh)"
 # using cmd flag to replace cd with zoxide
 # append '--cmd' to make cd z = cd, zi = cdi
 eval "$(zoxide init zsh)"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
 eval "$(starship init zsh)"
