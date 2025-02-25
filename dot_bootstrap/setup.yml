@@ -1,0 +1,192 @@
+---
+- name: Machine Setup
+  hosts: localhost
+  connection: local
+  gather_facts: true
+  vars:
+    packages:
+      - zsh
+      - fish
+      - ripgrep
+      - fzf
+      - zoxide
+      - unzip
+
+    pkg_mgr:
+      Debian:
+        update: apt update
+        upgrade: apt upgrade -y
+        clean: apt autoremove -y && apt autoclean -y
+        pkg_name: apt
+      RedHat:
+        update: dnf check-update
+        upgrade: dnf upgrade -y
+        clean: dnf autoremove -y
+        pkg_name: dnf
+      Suse:
+        update: zypper refresh
+        upgrade: zypper update -y
+        clean: zypper clean
+        pkg_name: zypper
+      Archlinux:
+        update: pacman -Sy
+        upgrade: pacman -Su --noconfirm
+        clean: pacman -Sc --noconfirm
+        pkg_name: pacman
+
+    build_packages:
+      Debian: [build-essential]
+      RedHat: [gcc-c++, make, automake]
+      Suse: [gcc-c++, make, automake]
+      Archlinux: [base-devel]
+
+  tasks:
+    - name: Check package manager support
+      debug:
+        msg: "warning: unsupported os family '{{ ansible_os_family }}', package management tasks will be skipped"
+      when: pkg_mgr[ansible_os_family] is not defined
+
+    - name: Check build tools support
+      debug:
+        msg: "warning: unsupported os family '{{ ansible_os_family }}' for build tools, build dependencies will be skipped"
+      when: build_packages[ansible_os_family] is not defined
+
+    - name: Update and upgrade system packages
+      block:
+        - name: Run package manager update
+          shell: "{{ pkg_mgr[ansible_os_family]['update'] }}"
+          register: update_result
+          changed_when: false
+          failed_when:
+            - update_result.rc != 0 
+            - update_result.rc != 100  # fedora's "updates available" return code
+
+        - name: Upgrade packages
+          shell: "{{ pkg_mgr[ansible_os_family]['upgrade'] }}"
+
+        - name: Clean package cache
+          shell: "{{ pkg_mgr[ansible_os_family]['clean'] }}"
+      become: true
+      when: pkg_mgr[ansible_os_family] is defined
+
+    - name: Install build dependencies
+      package:
+        name: "{{ build_packages[ansible_os_family] }}"
+        state: present
+      become: true
+      when: build_packages[ansible_os_family] is defined
+
+    - name: Install common packages
+      package:
+        name: "{{ packages }}"
+        state: present
+      become: true
+
+    - name: Set up PATH
+      set_fact:
+        custom_path: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.HOME }}/.cargo/bin:{{ ansible_env.PATH }}"
+
+    - name: Set up mise-en-place
+      block:
+        - name: Check mise version
+          command: mise --version
+          register: mise_version
+          changed_when: false
+          failed_when: false
+
+        - name: Install mise
+          when: mise_version.rc != 0
+          shell: curl https://mise.run | sh
+          args:
+            creates: '{{ ansible_env.HOME }}/.local/bin/mise'
+
+        - name: Update mise
+          when: mise_version.rc == 0
+          shell: mise self-update
+          changed_when: false
+
+        - name: Update managed runtimes
+          when: mise_version.rc == 0
+          shell: mise upgrade
+          changed_when: false
+
+        # NOTE: This just sets globals, you can still change versions per project
+        - name: Install NodeJS LTS
+          shell: mise use --global node@lts
+          environment:
+            PATH: "{{ custom_path }}"
+
+        - name: Install Python latest
+          shell: mise use --global python@latest
+          environment:
+            PATH: "{{ custom_path }}"
+
+        # https://docs.astral.sh/uv/
+        - name: Install uv latest 
+          shell: mise use --global uv@latest
+          environment:
+            PATH: "{{ custom_path }}"
+
+    - name: Install starship
+      shell: curl -sS https://starship.rs/install.sh | sh -s -- --yes
+      args:
+        creates: "{{ ansible_env.HOME }}/.local/bin/starship"
+      environment:
+        PATH: "{{ custom_path }}"
+      become: true
+
+    - name: Clone zsh plugins
+      git:
+        repo: "{{ item.repo }}"
+        dest: "{{ ansible_env.HOME }}/.zsh/{{ item.name }}"
+      loop:
+        - { name: "zsh-syntax-highlighting", repo: "https://github.com/zsh-users/zsh-syntax-highlighting" }
+        - { name: "zsh-autosuggestions", repo: "https://github.com/zsh-users/zsh-autosuggestions" }
+
+    - name: Install Rust
+      block:
+        - name: Check rustc version
+          shell: rustc --version
+          register: rust_version
+          changed_when: false
+          failed_when: false
+
+        - name: Install Rust via rustup
+          when: rust_version.rc != 0
+          shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          args:
+            creates: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+
+        - name: Update rust
+          when: rust_version.rc == 0
+          shell: rustup update
+          changed_when: false
+
+    - name: Install and configure bob-nvim
+      block:
+        - name: Check bob version
+          shell: bob --version
+          register: bob_version
+          changed_when: false
+          failed_when: false
+
+        - name: Install bob-nvim
+          when: bob_version.rc != 0
+          shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install bob-nvim"
+          args:
+            creates: "{{ ansible_env.HOME }}/.cargo/bin/bob"
+
+        - name: Update bob-nvim
+          when: bob_version.rc == 0
+          shell: "{{ ansible_env.HOME }}/.cargo/bin/cargo install bob-nvim"
+          changed_when: false
+
+        # TODO: Consider nightly?
+        - name: Install and use latest neovim
+          shell: |
+            {{ ansible_env.HOME }}/.cargo/bin/bob install latest
+            {{ ansible_env.HOME }}/.cargo/bin/bob use latest
+          environment:
+            PATH: "{{ custom_path }}"
+
+
