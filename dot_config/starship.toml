@@ -1,0 +1,21 @@
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+# single-line prompt
+[line_break]
+disabled = true
+
+# minimalist ➜ prompt
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+[git_branch]
+symbol = ''
+truncation_length = 4
+truncation_symbol = ''
+
+[git_status]
+ahead = '⇡${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+behind = '⇣${count}'

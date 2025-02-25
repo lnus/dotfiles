@@ -1,0 +1,120 @@
+# Plugins
+plugins=(
+  "$HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  "$HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+)
+
+# source each plugin
+for plugin in $plugins; do
+  if [[ -f $plugin ]]; then
+    source $plugin
+  fi
+done
+
+# common ls aliases
+alias ls='ls --color=auto'
+alias ll='ls -lh'
+alias la='ls -lah'
+alias l='ls -CF'
+
+# common shortcuts
+alias ..='cd ..'
+alias ...='cd ../..'
+alias md='mkdir -p'
+alias rd='rmdir'
+
+# grep with color
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# misc
+alias h='history'
+alias :q='exit'
+
+
+# Some aliases that I enjoy
+alias v="nvim" # Change this to vim if you want to use vim, but why would you?
+alias e="$EDITOR"
+alias lg="lazygit" # Lazygit
+alias wfs="cd /mnt/c/Users/Linus" # windows filesystem
+alias zshsource="source ~/.zshrc"
+alias vscode="code" # Change this to code-insiders if you want to use nightly
+
+# https://github.com/lnus/stag
+# Uses stag to cd
+scd() {
+    local tags="${1:-proj}" # Default to 'proj' if no args
+    local dir=$(stag s $tags --dirs | fzf)
+    if [ -n "$dir" ]; then
+        cd "$dir"
+    fi
+}
+
+# Use stag to open file in $EDITOR with fzf
+sed() {
+    if [ $# -eq 0 ]; then
+        echo "Error: No tags provided" >&2
+        return 1
+    fi
+
+    local tags="$1"
+    local files=$(stag s $tags --files | fzf)
+    if [ -n "$files" ]; then
+        if [ -z "$EDITOR" ]; then
+            echo "Error: \$EDITOR not set" >&2
+            return 1
+        fi
+        $EDITOR "$files"
+    fi
+}
+
+# VSCode function
+c () {
+    if [ $# -eq 0 ]; then
+        vscode . # Run code with current directory
+    else
+        vscode $* # Run code with all arguments
+    fi
+}
+
+# Source cargo
+. "$HOME/.cargo/env"
+
+# Append some stuff to path
+
+# bob nvim install thing
+path+=("$HOME/.local/share/bob/nvim-bin")
+
+# local bin
+path+=("$HOME/.local/bin")
+
+# Go path
+path+=('/usr/local/go/bin')
+
+# mise-en-place
+eval "$(~/.local/bin/mise activate zsh)"
+
+# Zoxide
+# using cmd flag to replace cd with zoxide
+# append '--cmd' to make cd z = cd, zi = cdi
+eval "$(zoxide init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+eval "$(starship init zsh)"
