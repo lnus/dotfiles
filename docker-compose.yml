@@ -1,0 +1,30 @@
+services:
+  ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BASE_IMAGE: ubuntu:latest
+        USERNAME: testuser
+    tty: true
+    stdin_open: true
+
+  fedora:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BASE_IMAGE: fedora:latest
+        USERNAME: testuser
+    tty: true
+    stdin_open: true
+
+  arch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        BASE_IMAGE: archlinux:latest
+        USERNAME: testuser
+    tty: true
+    stdin_open: true
