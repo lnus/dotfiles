@@ -46,4 +46,4 @@ install_ansible() {
 
 install_ansible
 
-ansible-playbook ~/.bootstrap/setup.yml -K --diff
+ansible-playbook ~/.bootstrap/setup.yml -K --diff --verbose
