@@ -43,6 +43,10 @@ return {
     end,
   },
   {
+    'bezhermoso/tree-sitter-ghostty',
+    build = 'make nvim_install',
+  },
+  {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',
     ft = { 'markdown' },

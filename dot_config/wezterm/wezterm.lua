@@ -21,16 +21,16 @@ config.font_size = 14
 config.colors = wezterm.get_builtin_color_schemes()["rose-pine"]
 
 -- Window Configuration
-config.initial_rows = 45
-config.initial_cols = 180
+-- config.initial_rows = 45
+-- config.initial_cols = 180
 config.window_decorations = "RESIZE"
 config.window_background_opacity = opacity
 -- config.window_background_image = (os.getenv("WEZTERM_CONFIG_FILE") or ""):gsub("wezterm.lua", "bg-blurred.png")
 config.window_close_confirmation = "NeverPrompt"
-config.win32_system_backdrop = "Acrylic"
+-- config.win32_system_backdrop = "Acrylic"
 
 -- Performance Settings
-config.max_fps = 144
+config.max_fps = 165
 config.animation_fps = 60
 config.cursor_blink_rate = 250
 
@@ -75,9 +75,6 @@ end)
 
 -- Disable the annoying bell
 config.audible_bell = "Disabled"
-
--- WSL stuff
-config.default_domain = "WSL:Ubuntu"
 
 -- Return the configuration to wezterm
 return config
