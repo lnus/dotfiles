@@ -8,6 +8,12 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
+-- FIX: Hacky fix for hot reloading issues in Bun
+-- https://github.com/oven-sh/bun/issues/8520
+-- Do this with an autocommand instead
+-- For now, yolo
+vim.opt.backupcopy = 'yes'
+
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
