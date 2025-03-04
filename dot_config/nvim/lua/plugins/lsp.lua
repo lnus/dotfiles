@@ -180,16 +180,18 @@ return {
           },
         },
       },
-      emmet_ls = { filetypes = { 'html', 'jinja.html', 'jinja2', 'htmldjango', 'twig', 'hbs' } },
+      emmet_ls = {
+        -- filetypes = { 'html', 'jinja.html', 'jinja2', 'htmldjango', 'twig', 'hbs' }
+      },
       html = {
-        filetypes = { 'html', 'jinja.html', 'jinja2', 'htmldjango', 'twig', 'hbs' },
-        init_options = {
-          configurationSection = { 'html', 'css', 'javascript' },
-          embeddedLanguages = {
-            css = true,
-            javascript = true,
-          },
-        },
+        -- filetypes = { 'html', 'jinja.html', 'jinja2', 'htmldjango', 'twig', 'hbs' },
+        -- init_options = {
+        --   configurationSection = { 'html', 'css', 'javascript' },
+        --   embeddedLanguages = {
+        --     css = true,
+        --     javascript = true,
+        --   },
+        -- },
       },
       -- jinja_lsp = { filetypes = { 'html' } },
       ts_ls = {},

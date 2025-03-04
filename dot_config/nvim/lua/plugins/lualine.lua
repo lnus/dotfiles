@@ -43,12 +43,12 @@ return {
         lualine_z = {},
       },
       sections = {
-        lualine_a = {},
+        lualine_a = { 'mode' },
         lualine_b = {},
-        lualine_c = { 'mode' },
-        lualine_x = { 'progress', 'location' },
+        lualine_c = {},
+        lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = { 'progress', 'location' },
       },
       inactive_sections = {
         lualine_a = {},
