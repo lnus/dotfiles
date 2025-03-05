@@ -3,6 +3,7 @@ theme = Kanagawa Dragon
 font-feature=+calt,+liga,+dlig
 font-size=13
 
+window-decoration=none
 window-theme=ghostty
 
 background-opacity = 1.0
@@ -15,7 +16,6 @@ keybind = ctrl+s>w>d=toggle_window_decorations
 
 keybind = alt+enter=toggle_fullscreen
 keybind = alt+d=toggle_window_decorations
-
 
 # Split keybindings
 keybind = ctrl+s>p>h=new_split:left
