@@ -47,6 +47,11 @@ return {
     build = 'make nvim_install',
   },
   {
+    'fladson/vim-kitty',
+    ft = 'kitty',
+    -- tag = "*"  -- You can select a tagged version
+  },
+  {
     'iamcco/markdown-preview.nvim',
     build = 'cd app && npm install',
     ft = { 'markdown' },
