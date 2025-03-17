@@ -65,8 +65,11 @@ return {
   },
   {
     'chomosuke/typst-preview.nvim',
-    lazy = false, -- or ft = 'typst'
+    ft = 'typst',
     version = '1.*',
     opts = {}, -- lazy.nvim will implicitly calls `setup {}`
+    keys = {
+      { '<C-r>', '<cmd>TypstPreviewToggle<CR>', desc = 'Toggle Typst Preview', ft = 'typst' },
+    },
   },
 }
