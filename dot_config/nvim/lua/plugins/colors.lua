@@ -1,19 +1,10 @@
 return {
-  'rebelot/kanagawa.nvim',
+  'neanias/everforest-nvim',
 
   lazy = false,
   priority = 1000,
-
   config = function()
-    require('kanagawa').setup {
-      background = {
-        dark = 'dragon',
-        light = 'lotus',
-      },
-
-      transparent = true,
-    }
-
-    vim.cmd 'colorscheme kanagawa'
+    require('everforest').setup {}
+    vim.cmd 'colorscheme everforest'
   end,
 }
