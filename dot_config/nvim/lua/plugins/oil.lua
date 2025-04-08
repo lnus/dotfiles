@@ -6,6 +6,7 @@ return {
     keymaps = {
       ['\\'] = { 'actions.close', mode = 'n' },
       ['q'] = { 'actions.close', mode = 'n' },
+      ['<BS>'] = { 'actions.parent', mode = 'n' },
     },
     view_options = {
       show_hidden = true,
