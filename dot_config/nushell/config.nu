@@ -17,17 +17,31 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 # NOTE: config nu --doc | nu-highlight | less -R
+
+# === Global shell settings ===
 $env.config.buffer_editor = "nvim"
 $env.config.show_banner = false
+
+# === Prompt ===
 $env.PROMPT_COMMAND_RIGHT = ""
 
+# $env.TRANSIENT_PROMPT_COMMAND = ""
+
+# === Aliases === 
 alias ll = ls -l
 alias la = ls -a
 alias v = nvim
-
 alias lg = lazygit
 alias lado = lazydocker
 
-source ~/.zoxide.nu
+# === Functions ===
 
+# === Path and sourcing ===
+$env.path ++= [
+  "~/.local/bin",
+  "~/.cargo/bin",
+  "~/.local/share/bob/nvim-bin",
+  "~/.config/emacs/bin"
+]
 use ($nu.default-config-dir | path join mise.nu)
+source ~/.zoxide.nu
