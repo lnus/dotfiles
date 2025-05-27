@@ -48,3 +48,7 @@
 ;; (unpin! t)
 (package! typst-ts-mode
   :recipe (:host codeberg :repo "meow_king/typst-ts-mode"))
+
+;; Fish shell scripts major mode
+;; https://github.com/wwwjfy/emacs-fish
+(package! fish-mode)
