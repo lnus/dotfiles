@@ -52,3 +52,7 @@
 ;; Fish shell scripts major mode
 ;; https://github.com/wwwjfy/emacs-fish
 (package! fish-mode)
+
+;; Elisp autofmt
+;; https://codeberg.org/ideasman42/emacs-elisp-autofmt
+(package! elisp-autofmt)
