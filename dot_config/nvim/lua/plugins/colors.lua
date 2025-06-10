@@ -1,12 +1,13 @@
 return {
-  'neanias/everforest-nvim',
+  'ellisonleao/gruvbox.nvim',
 
   lazy = false,
   priority = 1000,
+
   config = function()
-    require('everforest').setup {
-      background = 'hard',
+    require('gruvbox').setup {
+      background = 'dark',
     }
-    vim.cmd 'colorscheme everforest'
+    vim.cmd 'colorscheme gruvbox'
   end,
 }
