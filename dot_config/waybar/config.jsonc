@@ -1,0 +1,43 @@
+// -*- mode: jsonc -*-
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 0,
+  "spacing": 0,
+  "margin-top": 0,
+  "margin-bottom": 6, // (niri gaps) / 2
+  "margin-left": 10, // niri gaps - border/focus-ring
+  "margin-right": 10, // niri gaps - border/focus-ring
+
+  "modules-left": ["niri/workspaces"],
+  "modules-center": ["niri/window"],
+  "modules-right": ["tray", "cpu", "memory", "pulseaudio", "battery", "clock"],
+
+  "niri/window": {
+    "separate-outputs": true // niri/window monitor dependant
+  },
+  "tray": {
+    "spacing": 12
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%Y-%m-%d}"
+  },
+  "cpu": {
+    "format": "{usage}% CPU",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "{}% MEM"
+  },
+  "battery": {
+    "format": "{capacity}%",
+    "format-charging": "{capacity}% "
+  },
+  "pulseaudio": {
+    "format": "{volume}%",
+    "format-muted": "MUTED",
+    "on-click": "pavucontrol"
+  }
+}

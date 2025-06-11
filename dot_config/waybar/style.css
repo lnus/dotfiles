@@ -1,0 +1,75 @@
+@import url("./gruvbox-dark.css");
+/* @import url("./gruvbox-light.css"); */
+
+* {
+    font-family:
+        "Noto Sans Mono", "Font Awesome 6 Free", "Font Awesome 6 Brands",
+        monospace;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: @bg_h;
+    color: @fg;
+}
+
+button:hover {
+    box-shadow: none;
+    text-shadow: none;
+    background: none;
+    transition: none;
+    border-color: transparent;
+}
+
+#window,
+#tray,
+#clock,
+#cpu,
+#memory,
+#battery,
+#pulseaudio {
+    background: transparent;
+    padding: 0px 0px;
+    border-radius: 0px;
+    margin: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 14px;
+}
+
+#workspaces {
+    margin-left: 5px;
+}
+
+#workspaces button {
+    color: @fg;
+    padding: 0 5px;
+    margin-right: 1px;
+    border-radius: 0px;
+}
+
+#workspaces button.active {
+    background: @blue;
+    color: @bg;
+}
+
+#workspaces button.urgent {
+    background-color: @red;
+    animation: urgentBlink 1s linear infinite alternate;
+}
+
+#tray {
+    padding: 0px 4px;
+}
+
+#pulseaudio.muted {
+    padding: 0px 4px;
+    background-color: @red;
+    color: @bg;
+}
+
+.modules-left,
+.modules-right,
+.modules-center {
+    padding: 4px 0px;
+}

@@ -1,0 +1,31 @@
+@define-color bg_h rgba(29, 32, 33, 1);
+@define-color bg rgba(40, 40, 40, 1);
+@define-color bg_s rgba(50, 48, 47, 1);
+@define-color bg1 rgba(60, 56, 54, 1);
+@define-color bg2 rgba(80, 73, 69, 1);
+@define-color bg3 rgba(102, 92, 84, 1);
+@define-color bg4 rgba(124, 111, 100, 1);
+
+@define-color fg rgba(251, 241, 199, 1);
+@define-color fg1 rgba(235, 219, 178, 1);
+@define-color fg2 rgba(213, 196, 161, 1);
+@define-color fg3 rgba(189, 174, 147, 1);
+@define-color fg4 rgba(168, 153, 132, 1);
+
+@define-color red rgba(251, 73, 52, 1);
+@define-color green rgba(184, 187, 38, 1);
+@define-color yellow rgba(250, 189, 47, 1);
+@define-color blue rgba(131, 165, 152, 1);
+@define-color purple rgba(211, 134, 155, 1);
+@define-color aqua rgba(142, 192, 124, 1);
+@define-color gray rgba(146, 131, 116, 1);
+@define-color orange rgba(254, 128, 25, 1);
+
+@define-color red-dim rgba(204, 36, 18, 1);
+@define-color green-dim rgba(152, 151, 26, 1);
+@define-color yellow-dim rgba(215, 153, 33, 1);
+@define-color blue-dim rgba(69, 133, 136, 1);
+@define-color purple-dim rgba(177, 98, 134, 1);
+@define-color aqua-dim rgba(104, 157, 106, 1);
+@define-color gray-dim rgba(168, 153, 132, 1);
+@define-color orange-dim rgba(214, 93, 14, 1);

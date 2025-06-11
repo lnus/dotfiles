@@ -46,7 +46,7 @@ output "DP-3" {
 // --- Window position and size ---
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
-    gaps 16
+    gaps 12
     center-focused-column "never"
 
     // NOTE Mod+R
@@ -64,14 +64,14 @@ layout {
     focus-ring {
         // off
         width 2
-        active-color "#fe8019"
+        active-color "#83a598"
         inactive-color "#282828"
     }
 
     border {
         off
         width 2
-        active-color "#fe8019"
+        active-color "#b8bb26"
         inactive-color "#282828"
         urgent-color "#cc241d"
     }
@@ -100,6 +100,11 @@ animations {
 
 // --- Window rules ---
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
+window-rule {
+    match app-id=r#"pavucontrol"#
+    open-floating true
+}
+
 window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
