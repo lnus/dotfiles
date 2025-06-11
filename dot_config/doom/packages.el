@@ -56,3 +56,8 @@
 ;; Elisp autofmt
 ;; https://codeberg.org/ideasman42/emacs-elisp-autofmt
 (package! elisp-autofmt)
+
+;; KDL major mode, mostly for niri config
+;; https://github.com/taquangtrung/emacs-kdl-mode
+;; https://melpa.org/#/kdl-mode
+(package! kdl-mode)
