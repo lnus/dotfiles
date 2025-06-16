@@ -9,6 +9,7 @@ input {
         xkb {
             layout "us"
             options "ctrl:nocaps"
+            variant "altgr-intl"
         }
 
         numlock
@@ -33,6 +34,11 @@ input {
 // --- Output devices ---
 // `niri msg outputs`
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
+output "eDP-1" {
+    mode "1920x1080"
+    scale 1
+}
+
 output "DP-4" {
     mode "2560x1440"
     focus-at-startup
@@ -127,6 +133,10 @@ window-rule {
     clip-to-geometry true
 }
 
+hotkey-overlay {
+    skip-at-startup
+}
+
 // --- Keybind settings ---
 // /usr/include/X11/keysymdef.h
 // https://github.com/jwrdegoede/wev
@@ -148,6 +158,9 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    // TODO Brightness controls laptop
+
 
     Mod+O repeat=false { toggle-overview; }
 
@@ -310,7 +323,7 @@ binds {
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Mod+Shift+E { quit; }
+    Mod+Shift+E { spawn "fuzzel-powermenu"; }
     Ctrl+Alt+Delete { quit; }
 
     Mod+Shift+P { power-off-monitors; }

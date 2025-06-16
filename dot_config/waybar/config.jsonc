@@ -11,7 +11,7 @@
 
   "modules-left": ["niri/workspaces"],
   "modules-center": ["niri/window"],
-  "modules-right": ["tray", "cpu", "memory", "pulseaudio", "battery", "clock"],
+  "modules-right": ["tray", "network", "backlight", "pulseaudio", "battery", "clock"],
 
   "niri/window": {
     "separate-outputs": true // niri/window monitor dependant
@@ -25,19 +25,38 @@
     "format-alt": "{:%Y-%m-%d}"
   },
   "cpu": {
-    "format": "{usage}% CPU",
+    "format": "{usage}% ",
     "tooltip": false
   },
   "memory": {
-    "format": "{}% MEM"
+    "format": "{}% "
+  },
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click-right": "fuzzel-networking",
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{percent}% {icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""]
   },
   "battery": {
-    "format": "{capacity}%",
-    "format-charging": "{capacity}% "
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-icons": ["", "", "", "", ""]
   },
   "pulseaudio": {
-    "format": "{volume}%",
-    "format-muted": "MUTED",
-    "on-click": "pavucontrol"
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon} ",
+    "format-bluetooth-muted": " {icon} ",
+    "format-muted": "",
+    "format-icons": ["", "", ""],
+    "on-click": "pavucontrol",
+    "on-click-right": "blueman-manager"
   }
 }

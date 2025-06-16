@@ -25,7 +25,9 @@ button:hover {
 #tray,
 #clock,
 #cpu,
+#network,
 #memory,
+#backlight,
 #battery,
 #pulseaudio {
     background: transparent;
