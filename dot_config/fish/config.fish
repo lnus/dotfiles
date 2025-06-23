@@ -24,7 +24,9 @@ alias la="eza $EZA_DEFAULT_FLAGS -lAh"
 fish_add_path ~/.local/share/bob/nvim-bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/.local/bin
+fish_add_path ~/.config/emacs/bin
 
+direnv hook fish | source
 ~/.local/bin/mise activate fish | source
 zoxide init fish | source
 starship init fish | source

@@ -100,8 +100,8 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // --- Animation ---
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
-    // off
-    slowdown 0.5
+    off
+    // slowdown 0.5
 }
 
 // --- Window rules ---
@@ -114,6 +114,11 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
+}
+
+window-rule {
+    geometry-corner-radius 0 // leaving in case i want to round later
+    clip-to-geometry true
 }
 
 window-rule {
@@ -153,14 +158,18 @@ binds {
 
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
 
-    // TODO media controls?
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    // TODO Brightness controls laptop
+    // NOTE Priority
+    // https://github.com/altdesktop/playerctl?tab=readme-ov-file#selecting-players-to-control
+    XF86AudioPlay        allow-when-locked=true { spawn "playerctl" "--player=spotify,%any" "play-pause"; }
+    XF86AudioNext        allow-when-locked=true { spawn "playerctl" "--player=spotify,%any" "next"; }
+    XF86AudioPrev        allow-when-locked=true { spawn "playerctl" "--player=spotify,%any" "previous"; }
 
+    // TODO Brightness controls laptop
 
     Mod+O repeat=false { toggle-overview; }
 
