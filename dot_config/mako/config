@@ -1,7 +1,25 @@
 # man 5 mako
-default-timeout=3500
-background-color=#282828
-border-color=#83A598
+font=JetBrainsMono Nerd Font 12
+default-timeout=3000
+border-size=2
+padding=8
+border-radius=6
+max-icon-size=24
+default-timeout=3000
+anchor=top-right
+width=300
+background-color=#1e1e2e
+text-color=#cdd6f4
+
+[app-name="volume"]
+anchor=bottom-center
+margin=20
+border-size=0
+text-alignment=center
+default-timeout=1000
+padding=8
+background-color=#ffffff00
+text-color=#cdd6f4
 
 [urgency=high]
 border-color=#FB4934
