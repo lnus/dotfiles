@@ -1,6 +1,31 @@
+// NOTE: Nvidia high VRAM fix
+// https://github.com/YaLTeR/niri/wiki/Nvidia
+
 // https://kdl.dev
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 // https://github.com/YaLTeR/niri/blob/main/resources/default-config.kdl
+
+// --- Misc ---
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Miscellaneous
+overview {
+    // backdrop-color "#282828"
+    backdrop-color "#1d2021"
+
+    workspace-shadow {
+        softness 40
+        spread 10
+        offset x=0 y=10
+        color "#fbf1c750"
+    }
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+debug {
+    wait-for-frame-completion-in-pipewire
+} // Nvidia screencast flickering fix
 
 // --- Input devices ---
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
@@ -43,19 +68,34 @@ gestures {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 output "eDP-1" {
     mode "1920x1080"
-    scale 1
+    scale 1.0
 }
 
 output "DP-4" {
-    // variable-refresh-rate
-    mode "2560x1440"
+    mode "2560x1440@164.834"
+
     focus-at-startup
+    scale 1.0
+    background-color "#1d2021"
+    // variable-refresh-rate
 }
 
 output "DP-3" {
-    mode "1920x1080"
+    mode "1920x1080@144.001"
+
+    scale 1.0
+    background-color "#1d2021"
 }
 
+// --- Named workspaces ---
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Named-Workspaces
+// workspace "browser" {
+//     open-on-output "DP-3"
+// }
+
+// workspace "chat" {
+//     open-on-output "DP-3"
+// }
 
 // --- Window position and size ---
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
@@ -154,6 +194,11 @@ window-rule {
     open-floating true
 }
 
+window-rule {
+    match app-id=r#"firefox$"# title="^Extension:"
+    open-floating true
+}
+
 /-window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
@@ -166,9 +211,6 @@ window-rule {
     clip-to-geometry true
 }
 
-hotkey-overlay {
-    skip-at-startup
-}
 
 // --- Keybind settings ---
 // /usr/include/X11/keysymdef.h
@@ -178,14 +220,13 @@ binds {
     // Mod-?,
     Mod+Shift+Slash { show-hotkey-overlay; }
 
+    Mod+B hotkey-overlay-title="Firefox" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Open Emacs client" { spawn "emacsclient" "-c" "-a" "'emacs'"; }
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+Shift+Return hotkey-overlay-title="Open a Terminal: ghostty (testing)" { spawn "ghostty-nixgl"; }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+Shift+A { spawn "fuzzel-pipe-sink"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
-
-    // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
 
     // XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" "&&" "notify-volume"; }
     // XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-" "&&" "notify-volume"; }

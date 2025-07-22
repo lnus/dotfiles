@@ -5,9 +5,12 @@
   "height": 0,
   "spacing": 0,
   "margin-top": 0,
-  "margin-bottom": 6, // (niri gaps) / 2
-  "margin-left": 10, // niri gaps - border/focus-ring
-  "margin-right": 10, // niri gaps - border/focus-ring
+  // "margin-bottom": 6, // (niri gaps) / 2
+  // "margin-left": 10, // niri gaps - border/focus-ring
+  // "margin-right": 10, // niri gaps - border/focus-ring
+  "margin-bottom": 0, // (niri gaps) / 2
+  "margin-left": 0, // niri gaps - border/focus-ring
+  "margin-right": 0, // niri gaps - border/focus-ring
 
   "modules-left": ["niri/workspaces"],
   "modules-center": ["niri/window"],
