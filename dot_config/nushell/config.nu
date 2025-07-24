@@ -20,11 +20,11 @@
 
 # === Global shell settings ===
 $env.config.buffer_editor = "nvim"
+$env.config.edit_mode = "vi"
 $env.config.show_banner = false
 
-# === Prompt ===
-$env.PROMPT_COMMAND_RIGHT = ""
-
+# === Prompt === (!!STARSHIP!!)
+# $env.PROMPT_COMMAND_RIGHT = ""
 # $env.TRANSIENT_PROMPT_COMMAND = ""
 
 # === Aliases === 
@@ -34,7 +34,9 @@ alias v = nvim
 alias lg = lazygit
 alias lado = lazydocker
 
-# === Functions ===
+# === Scripts ===
+export const SCRIPTS_DIR = ($nu.config-path | path dirname | path join scripts)
+use $SCRIPTS_DIR *
 
 # === Path and sourcing ===
 $env.path ++= [
@@ -43,5 +45,11 @@ $env.path ++= [
   "~/.local/share/bob/nvim-bin",
   "~/.config/emacs/bin"
 ]
+
 use ($nu.default-config-dir | path join mise.nu)
+
+mkdir ($nu.data-dir | path join "vendor/autoload")
+starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+
 source ~/.zoxide.nu
+source ~/.cache/carapace/init.nu
