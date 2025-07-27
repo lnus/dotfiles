@@ -2,7 +2,7 @@ export def main [] {
   let selection = (
     ["Lock", "Suspend", "Log out", "Reboot", "Shutdown (Power Off)"] 
     | str join "\n" 
-    | tofi --prompt "Powermenu: "
+    | tofi --prompt "power: "
   )
 
   match $selection {

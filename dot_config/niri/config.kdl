@@ -225,7 +225,9 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: ghostty (testing)" { spawn "ghostty-nixgl"; }
     Mod+Shift+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: tofi" { spawn "tofi-drun" "--drun-launch=true"; }
-    Mod+Shift+A { spawn "nu" "-l" "-c" "sinkswap"; } // https://www.nushell.sh/book/configuration.html#scenarios
+    Mod+Shift+A repeat=false { spawn "nu" "-l" "-c" "sinkswap"; } // https://www.nushell.sh/book/configuration.html#scenarios
+    Mod+Tab repeat=false { spawn "nu" "-l" "-c" "alt-tab"; } // TODO: Decide on alt or super
+    Alt+Tab repeat=false { spawn "nu" "-l" "-c" "alt-tab"; } // TODO: Decide on alt or super
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" "&&" "notify-volume"; }

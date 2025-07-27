@@ -42,7 +42,7 @@ export def main [] {
     }
   } | str join "\n"
 
-  let selected = ($menu_items | tofi --prompt "Select audio device: ")
+  let selected = ($menu_items | tofi --prompt "sink: ")
   let clean_selected = ($selected | str replace "● " "")
   let selected_sink = $sinks | where desc == $clean_selected | first
 
