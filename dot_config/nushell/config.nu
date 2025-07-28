@@ -5,17 +5,28 @@ $env.config.buffer_editor = "hx"
 $env.config.edit_mode = "vi"
 $env.config.show_banner = false
 
-# === Prompt === (!!STARSHIP!!)
-# $env.PROMPT_COMMAND_RIGHT = ""
-# $env.TRANSIENT_PROMPT_COMMAND = ""
+$env.config.cursor_shape = {
+  vi_insert: line
+  vi_normal: block
+}
 
 # === Aliases === 
-alias ll = ls -l
-alias la = ls -a
+alias la = ls --all
+alias ll = ls --long
+alias lla = ls --long --all
+alias sl = ls
+alias tree = eza --tree --git-ignore --group-directories-first
+
 alias e = hx
 alias v = nvim
-alias lg = lazygit
-alias lado = lazydocker
+alias fg = job unfreeze
+
+alias mv = mv --verbose
+alias rm = rm --verbose
+alias cp = cp --verbose --recursive --progress
+ 
+# === Prompt ===
+source ($nu.config-path | path dirname | path join "prompt.nu")
 
 # === Scripts ===
 export const SCRIPTS_DIR = ($nu.config-path | path dirname | path join scripts)
@@ -30,9 +41,6 @@ $env.path ++= [
 ]
 
 use ($nu.default-config-dir | path join mise.nu)
-
-mkdir ($nu.data-dir | path join "vendor/autoload")
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
 
 source ~/.zoxide.nu
 source ~/.cache/carapace/init.nu
